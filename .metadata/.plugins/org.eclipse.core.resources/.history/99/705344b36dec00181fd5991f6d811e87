@@ -1,0 +1,13 @@
+package br.com.easypark.backend.model.dto;
+
+import java.io.Serializable;
+import java.util.List;
+
+public class PedidoEntradaDTO implements Serializable{
+
+	private Long cliente;
+	private List<Long> produtos;
+	private long mesa;
+	
+
+}

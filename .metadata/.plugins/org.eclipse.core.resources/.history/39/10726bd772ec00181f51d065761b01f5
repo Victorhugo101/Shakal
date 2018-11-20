@@ -1,0 +1,7 @@
+package br.com.easypark.backend.model.dto;
+
+import java.io.Serializable;
+
+public class ProdutoDTO implements Serializable{
+
+}

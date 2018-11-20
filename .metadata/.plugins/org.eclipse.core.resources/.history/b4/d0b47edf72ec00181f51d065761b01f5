@@ -1,0 +1,15 @@
+package br.com.easypark.backend.model.dto;
+
+import java.io.Serializable;
+
+import javax.persistence.GeneratedValue;
+import javax.validation.constraints.NotBlank;
+
+public class ProdutoDTO implements Serializable{
+
+	
+	
+	 private Long id;
+	 private String nome;
+	 private String valor;
+}

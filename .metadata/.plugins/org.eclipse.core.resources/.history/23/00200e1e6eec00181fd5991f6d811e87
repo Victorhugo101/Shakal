@@ -1,0 +1,28 @@
+package br.com.easypark.backend.control;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import br.com.easypark.backend.data.PedidoDAO;
+
+@CrossOrigin
+@RestController
+@RequestMapping("/pedido")
+public class PedidoController {
+	
+	
+	@Autowired
+	private PedidoDAO pedidoDAO;
+	
+	
+	 
+	 @PostMapping("/save")
+	 public ResponseEntity<PedidoEntradaDTO> save(@RequestBody PedidoEntradaDTO mapaEntradaDTO) {
+	       
+	    }
+
+
+}

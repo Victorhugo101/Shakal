@@ -1,0 +1,25 @@
+package br.com.easypark.backend.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import br.com.easypark.backend.data.ProdutoDAO;
+import br.com.easypark.backend.model.Produto;
+import br.com.easypark.backend.model.dto.ProdutoDTO;
+
+public class ProdutoService {
+
+	@Autowired
+	private ProdutoDAO produtoDAO;
+	
+	
+	public List<ProdutoDTO> listarProdutosPorCategoria(long categoriaID) {
+		List<Produto> pesquisa = produtoDAO.findByCategory(categoriaID);
+		List<ProdutoDTO> resultado = new ArrayList<>();
+		for(Produto p: pesquisa) {
+			resultado.add(new ProdutoDTO())
+		}
+	}
+}

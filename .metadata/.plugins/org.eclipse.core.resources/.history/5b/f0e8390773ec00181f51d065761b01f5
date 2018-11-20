@@ -1,0 +1,16 @@
+package br.com.easypark.backend.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import br.com.easypark.backend.data.ProdutoDAO;
+
+public class ProdutoService {
+
+	@Autowired
+	private ProdutoDAO produtoDAO;
+	
+	
+	public ProdutoDTO listarProdutosPorCategoria() {
+		
+	}
+}
