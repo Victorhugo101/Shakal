@@ -1,0 +1,5 @@
+package br.com.easypark.backend.data;
+
+public interface ClienteDAO extends JpaRepository<Bairro,Long> {
+
+}

@@ -1,0 +1,10 @@
+package br.com.easypark.backend.model;
+
+import javax.persistence.Entity;
+
+@Entity
+public class Cliente {
+	
+	
+	
+}

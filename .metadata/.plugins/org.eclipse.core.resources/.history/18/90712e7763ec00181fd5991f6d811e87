@@ -1,0 +1,33 @@
+package br.com.easypark.backend.model;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
+@Entity
+@Table(name = "tb_produto")
+public class Produto {
+	
+	 @Id
+	 @GeneratedValue
+	 private Long id;
+	
+	 @NotBlank
+	 private String nome;
+	 
+	 @NotBlank
+	 private String valor;
+	 
+	 
+	 @ManyToOne(fetch = FetchType.LAZY)
+	 @JoinColumn(name = "id_cliente")
+	 private Cliente cliente; 
+	 
+	 
+
+}
