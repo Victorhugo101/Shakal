@@ -1,8 +1,0 @@
-package br.com.easypark.backend.control;
-
-
-@RestController
-@RequestMapping("/pedido")
-public class PedidoController {
-
-}

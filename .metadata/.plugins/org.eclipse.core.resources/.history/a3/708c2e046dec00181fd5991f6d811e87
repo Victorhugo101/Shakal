@@ -1,5 +1,0 @@
-package br.com.easypark.backend.control;
-
-public class PedidoController {
-
-}

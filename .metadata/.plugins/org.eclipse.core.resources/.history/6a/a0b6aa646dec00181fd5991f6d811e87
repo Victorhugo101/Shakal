@@ -1,7 +1,0 @@
-package br.com.easypark.backend.model.dto;
-
-public class PedidoEntradaDTO implements Serializable{
-
-	
-	private long id;
-}

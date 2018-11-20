@@ -1,5 +1,0 @@
-package br.com.easypark.backend.model;
-
-public class Cliente {
-	
-}
