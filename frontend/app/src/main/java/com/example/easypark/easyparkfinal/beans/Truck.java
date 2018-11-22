@@ -1,6 +1,6 @@
 package com.example.easypark.easyparkfinal.beans;
 
-public class FoodTruck {
+public class Truck {
     private Long id;
     private String nome;
     private String img;
@@ -30,7 +30,7 @@ public class FoodTruck {
 
     }
 
-    public FoodTruck(Long id, String nome, String img) {
+    public Truck(Long id, String nome, String img) {
         this.id = id;
         this.nome = nome;
         this.img = img;

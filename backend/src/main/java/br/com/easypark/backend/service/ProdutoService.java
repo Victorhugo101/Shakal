@@ -29,4 +29,12 @@ public class ProdutoService {
 		}
 		return resultado;
 	}
+	public List<ProdutoDTO> listarProdutosPorTruck(long categoriaID) {
+		List<ProdutoDTO> pesquisa = new ArrayList<>();
+		for(Produto r: produtoDAO.findAll()) {
+			if(r.getTruck().getId() == categoriaID)
+			pesquisa.add(new ProdutoDTO(r.getId(),r.getNome(),r.getValor()));
+		}
+		return pesquisa;
+	}
 }

@@ -26,9 +26,14 @@ public class ProdutoController {
 	private ProdutoService produtoService;
 	
 	
-	@GetMapping("/listarPorCategoria/{id}")
+	@GetMapping("/categoria/{id}")
 	 public ResponseEntity<List<ProdutoDTO>> listarPorCategoria(@PathVariable long id) {
 		return new ResponseEntity<List<ProdutoDTO>>(produtoService.listarProdutosPorCategoria(id),HttpStatus.OK);
+		 
+	 }
+	@GetMapping("/truck/{id}")
+	 public ResponseEntity<List<ProdutoDTO>> listarPorTruck(@PathVariable long id) {
+		return new ResponseEntity<List<ProdutoDTO>>(produtoService.listarProdutosPorTruck(id),HttpStatus.OK);
 		 
 	 }
 

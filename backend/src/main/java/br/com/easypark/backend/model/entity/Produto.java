@@ -31,6 +31,10 @@ public class Produto {
 	 @JoinColumn(name = "id_truck")
 	 private Truck truck;
 	 
+	 public Produto() {
+			
+		}
+	 
 	public Produto( String nome,String valor, Categoria categoria) {
 		this.nome = nome;
 		this.valor = valor;

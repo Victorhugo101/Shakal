@@ -23,16 +23,26 @@ public class Truck {
 	 private String cnpj;
 	 
 	 @NotBlank
+	 private String nomeFantasia;
+	 
+	 @NotBlank
 	 private String email;
 	 
 	 @NotBlank
 	 private String senha;
 	 
+	 private double latitude;
+	 
+	 private double longitude;
+	 
 	 @OneToMany(mappedBy = "truck", cascade = CascadeType.ALL)
 	 private List<Produto> produtos = new ArrayList<>();
-	 
-	public Truck( String cnpj, String email,  String senha) {
+	 public Truck( ) {
+			
+		}
+	public Truck( String cnpj,String nomeFantasia, String email,  String senha) {
 		this.cnpj = cnpj;
+		this.nomeFantasia = nomeFantasia;
 		this.email = email;
 		this.senha = senha;
 	}
@@ -51,6 +61,14 @@ public class Truck {
 
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
+	}
+
+	public String getNomeFantasia() {
+		return nomeFantasia;
+	}
+
+	public void setNomeFantasia(String nomeFantasia) {
+		this.nomeFantasia = nomeFantasia;
 	}
 
 	public String getEmail() {
@@ -76,7 +94,25 @@ public class Truck {
 	public void setProdutos(List<Produto> produtos) {
 		this.produtos = produtos;
 	}
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
 	 
+	
+	
 	 
 	 
 }

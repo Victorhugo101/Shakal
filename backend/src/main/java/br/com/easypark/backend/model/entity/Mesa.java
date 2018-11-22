@@ -24,9 +24,16 @@ public class Mesa {
 	 
 	 private int capacidade;
 	 
+	 private double latitude;
+	 private double longitude;
+	 
+	 
 	 @OneToMany(mappedBy = "mesa", cascade = CascadeType.ALL)
 	 private List<Pedido> pedidos = new ArrayList<>();
 	 
+	 public Mesa() {
+			
+		}
 	 
 	public Mesa(String qrCode, int capacidade, List<Pedido> pedidos) {
 		this.qrCode = qrCode;
@@ -60,6 +67,22 @@ public class Mesa {
 
 	public List<Pedido> getPedidos() {
 		return pedidos;
+	}
+	
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
 	}
 
 	public void setPedidos(List<Pedido> pedidos) {

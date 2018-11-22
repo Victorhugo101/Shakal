@@ -11,19 +11,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.easypark.backend.model.entity.Categoria;
-import br.com.easypark.backend.service.CategoriaService;
+import br.com.easypark.backend.model.dto.TruckDTO;
+import br.com.easypark.backend.service.TruckService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/categoria")
-public class CategoriaController {
+@RequestMapping("/truck")
+public class TruckController {
 
-	@Autowired
-	private CategoriaService categoriaService;
 	
-	@GetMapping("/listar")
-	 public ResponseEntity<List<Categoria>> autenticar() {
-		return new ResponseEntity<List<Categoria>>(categoriaService.listAllCategories(), HttpStatus.OK);
-	}
+	@Autowired
+	private TruckService truckService;
+	
+	@GetMapping("/listar/mesa/{id}")
+	 public ResponseEntity<List<TruckDTO>> listarPorMesa(@PathVariable long id) {
+
+		return new ResponseEntity<List<TruckDTO>>(truckService.listarTrucksPertodaMesa(id),HttpStatus.OK);
+		 
+	 }
 }

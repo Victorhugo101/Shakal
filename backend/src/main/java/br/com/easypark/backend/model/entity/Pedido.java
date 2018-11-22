@@ -40,7 +40,9 @@ public class Pedido {
 	 @JoinColumn(name = "id_mesa")
 	 private Mesa mesa;
 
-	 
+	 public Pedido() {
+		
+		}
 	 
 
 	public Pedido(int status, Cliente cliente, List<Produto> produtos, Mesa mesa) {
