@@ -1,0 +1,52 @@
+package com.example.easypark.easyparkfinal.fragments;
+
+import android.content.Context;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.example.easypark.easyparkfinal.R;
+import com.example.easypark.easyparkfinal.beans.Produto;
+import com.example.easypark.easyparkfinal.beans.ProdutoListSerializable;
+import com.example.easypark.easyparkfinal.beans.Truck;
+
+
+public class ComprarProdutoFragment extends Fragment {
+
+    private Produto produto;
+    private Truck truck;
+    private TextView txtvNomeTruck;
+    private TextView txtvNomeProduto;
+    private TextView txtvPreco;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+
+        View view = inflater.inflate(R.layout.fragment_comprar_produto, container, false);
+        txtvNomeTruck = (TextView) view.findViewById(R.id.nomeFoodTruckDetalhesProduto);
+        txtvNomeProduto = (TextView) view.findViewById(R.id.nomeProdutoDetalhes);
+        txtvPreco = (TextView) view.findViewById(R.id.precoProdutoDetalhes);
+
+        Bundle bundle = getArguments();
+        produto = ((Produto) bundle.getSerializable("produto"));
+        txtvNomeProduto.setText(produto.getNome());
+        txtvPreco.setText("R$ " + String.valueOf(produto.getValor()));
+        return view;
+    }
+
+
+}

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.easypark.easyparkfinal.R;
 import com.example.easypark.easyparkfinal.adapters.ProdutoListAdapter;
+import com.example.easypark.easyparkfinal.adapters.RecycleViewClickListener;
 import com.example.easypark.easyparkfinal.beans.Produto;
 import com.example.easypark.easyparkfinal.beans.ProdutoListSerializable;
 import com.example.easypark.easyparkfinal.beans.Truck;
@@ -21,7 +22,7 @@ import java.util.List;
 import retrofit2.Call;
 
 
-public class ProdutoListFragment extends Fragment {
+public class ProdutoListFragment extends Fragment implements RecycleViewClickListener {
     private RecyclerView recyclerView;
     private List<Produto> foodTrucks;
     private Call call;
@@ -48,9 +49,15 @@ public class ProdutoListFragment extends Fragment {
         Bundle bundle = getArguments();
         List<Produto> tls =((ProdutoListSerializable) bundle.getSerializable("produtos")).getProdutoList();
         ProdutoListAdapter adapter = new ProdutoListAdapter(this.getContext(),tls );
+        adapter.setContatoRecycleViewOnClick(this);
         recyclerView.setAdapter(adapter);
         return view;
     }
 
 
+    @Override
+    public void onClickListener(View view, int position) {
+        ProdutoListAdapter adapter = (ProdutoListAdapter) recyclerView.getAdapter();
+        adapter.chamaProximoFragmento(position,this);
+    }
 }

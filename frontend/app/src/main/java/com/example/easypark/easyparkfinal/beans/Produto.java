@@ -1,16 +1,18 @@
 package com.example.easypark.easyparkfinal.beans;
 
+import java.io.Serializable;
+
 /**
  * Created by Renilson Albuquerque on 21/11/2018.
  */
 
-public class Produto {
+public class Produto implements Serializable{
 
     private Long id;
     private String nome;
-    private String valor;
+    private double valor;
 
-    public Produto(Long id, String nome, String valor) {
+    public Produto(Long id, String nome, double valor) {
         this.id = id;
         this.nome = nome;
         this.valor = valor;
@@ -32,11 +34,11 @@ public class Produto {
         this.nome = nome;
     }
 
-    public String getValor() {
+    public double getValor() {
         return valor;
     }
 
-    public void setValor(String valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
 }

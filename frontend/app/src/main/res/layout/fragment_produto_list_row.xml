@@ -1,0 +1,46 @@
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:paddingVertical="8dp"
+    android:paddingHorizontal="16dp"
+    tools:context=".fragments.TruckList">
+
+
+
+    <ImageView
+        android:id="@+id/imgProduto"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_weight="0"
+        android:layout_gravity="left"
+        android:paddingVertical="2dp"
+        android:src="@drawable/logo_easypark"
+        android:gravity="left"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="16dp"
+        android:layout_weight="1">
+        <TextView
+            android:id="@+id/nomeProduto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            />
+        <TextView
+            android:id="@+id/precoProduto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:typeface="normal"
+            android:textSize="16sp"
+            android:layout_gravity="right"
+            />
+    </LinearLayout>
+
+</LinearLayout>
