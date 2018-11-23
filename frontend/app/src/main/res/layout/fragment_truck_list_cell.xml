@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="72dp"
-    android:paddingVertical="8dp"
-    android:paddingHorizontal="16dp"
-    tools:context=".fragments.TruckList">
+    android:layout_margin="16dp">
 
 
 
@@ -27,7 +25,6 @@
             android:id="@+id/nomeFoodTruck"
             android:layout_width="wrap_content"
             android:textSize="20sp"
-            android:paddingVertical="8dp"
             android:paddingHorizontal="16dp"
             android:layout_height="90dp"
             android:layout_weight="1" />

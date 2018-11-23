@@ -15,6 +15,7 @@ import com.example.easypark.easyparkfinal.R;
 import com.example.easypark.easyparkfinal.beans.Produto;
 import com.example.easypark.easyparkfinal.beans.ProdutoListSerializable;
 import com.example.easypark.easyparkfinal.beans.Truck;
+import com.example.easypark.easyparkfinal.beans.TruckListSerializable;
 
 
 public class ComprarProdutoFragment extends Fragment {
@@ -75,7 +76,18 @@ public class ComprarProdutoFragment extends Fragment {
                 btnAdcionarAoCarrinho.setText("Adcionar ao carrinho R$ " + String.valueOf(produto.getValor() * quantidade));
             }
         });
-
+        btnAdcionarAoCarrinho.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("produto",produto);
+                bundle.putSerializable("quantidade",quantidade);
+                CarrinhoFragment fragment =  CarrinhoFragment.getInstance();
+                fragment.setArguments(bundle);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container,
+                        fragment).commit();
+            }
+        });
 
         return view;
     }
