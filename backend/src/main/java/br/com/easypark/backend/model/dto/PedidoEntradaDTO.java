@@ -13,6 +13,9 @@ public class PedidoEntradaDTO implements Serializable{
 	private HashMap<Long,Long> produtos;
 	private Long mesa;
 	
+	public PedidoEntradaDTO() {
+		
+	}
 	public PedidoEntradaDTO(Long cliente, HashMap<Long,Long> produtos, Long mesa) {
 		super();
 		this.cliente = cliente;

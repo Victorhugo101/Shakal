@@ -23,7 +23,7 @@ public class Pedido {
 	 @GeneratedValue
 	 private Long id;
 	
-	 @NotBlank
+
 	 private int status;
 	 
 	 @ManyToOne(fetch = FetchType.LAZY)
@@ -51,6 +51,7 @@ public class Pedido {
 		this.cliente = cliente;
 		this.produtos = produtos;
 		this.mesa = mesa;
+		this.status = 1;
 	}
 
 

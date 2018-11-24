@@ -25,8 +25,11 @@ public class PedidoController {
 	
 	 
 	 @PostMapping("/save")
-	 public ResponseEntity<PedidoEntradaDTO> save(@RequestBody PedidoEntradaDTO pedidoEntradaDTO) {
-		return new ResponseEntity<PedidoEntradaDTO>(pedidoService.save(pedidoEntradaDTO),HttpStatus.OK);
+	 public ResponseEntity<Boolean> save(@RequestBody PedidoEntradaDTO pedidoEntradaDTO) {
+		 if(pedidoService.save(pedidoEntradaDTO)) {
+			 return new ResponseEntity<Boolean>(true,HttpStatus.OK);
+		 }
+		return new ResponseEntity<Boolean>(false,HttpStatus.OK);
 		 
 	 }
 

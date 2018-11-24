@@ -31,17 +31,21 @@ public class PedidoService {
 	@Autowired
 	private MesaDAO mesaDAO;
 	
-	public PedidoEntradaDTO save(PedidoEntradaDTO pedidoEntradaDTO) {
+	public boolean save(PedidoEntradaDTO pedidoEntradaDTO) {
 		
 		Pedido p;
 		Cliente cliente = clienteDAO.findById(pedidoEntradaDTO.getCliente()).get();
 		Mesa m = mesaDAO.findById(pedidoEntradaDTO.getMesa()).get();
 		List<Produto> produtos = new ArrayList<>();
+		
 		for(short i = 0; i < pedidoEntradaDTO.getProdutos().size(); i++) {
+			System.out.println(pedidoEntradaDTO.getProdutos());
 			produtos.add(produtoDAO.getOne(pedidoEntradaDTO.getProdutos().get(i)));
 		}
+		
 		p = new Pedido(0,cliente, produtos,m);
+		p.setStatus(1);
 		pedidoDAO.save(p);
-		return pedidoEntradaDTO;
+		return true;
 	}
 }

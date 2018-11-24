@@ -15,13 +15,21 @@ import android.widget.Toast;
 
 import com.example.easypark.easyparkfinal.R;
 import com.example.easypark.easyparkfinal.adapters.CarrinhoListAdapter;
+import com.example.easypark.easyparkfinal.beans.PedidoDTO;
 import com.example.easypark.easyparkfinal.beans.Produto;
 import com.example.easypark.easyparkfinal.beans.ProdutoPedido;
 import com.example.easypark.easyparkfinal.beans.Truck;
 import com.example.easypark.easyparkfinal.beans.TruckListSerializable;
+import com.example.easypark.easyparkfinal.network.PedidoService;
+import com.example.easypark.easyparkfinal.network.UsuarioService;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class CarrinhoFragment extends Fragment {
@@ -90,8 +98,35 @@ public class CarrinhoFragment extends Fragment {
     }
 
     private boolean confirmarCompra(){
-        Toast.makeText(this.getContext(),"Compra confirmada",Toast.LENGTH_SHORT).show();
+        HashMap<Long,Long> produtos = new HashMap<Long, Long>();
+        for(ProdutoPedido p :this.produtosPedidos){
+            produtos.put(p.getId(), (long) p.getQuantidade());
+        }
+        PedidoDTO pedidoDTO = new PedidoDTO(1L,1L,produtos);
+        Call call = PedidoService.cadastrarPedido(pedidoDTO);
+        call.enqueue(new Callback<Boolean>() {
+
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if (response.body()==true){
+                    exibirMensagem("Pedido finalizado");
+                }else{
+                    exibirMensagem("Erro ao cadastrar o pedido");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+
+                exibirMensagem("Erro ao cadastrar o seu pedido");
+            }
+
+        });
         return true;
+    }
+    public void exibirMensagem(String mensagem){
+        Toast.makeText(this.getContext(),mensagem,Toast.LENGTH_SHORT).show();
     }
 
 }

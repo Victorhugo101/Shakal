@@ -14,13 +14,11 @@ import javax.validation.constraints.NotBlank;
 public class PedidoProduto implements Serializable{
 
 	@Id
-	@NotBlank
     @ManyToOne(targetEntity = Produto.class)
     @JoinColumn(name = "id_produto" , referencedColumnName = "id")
     private Produto produto;
 
 	@Id
-    @NotBlank
     @ManyToOne(targetEntity = Pedido.class)
     @JoinColumn(name = "id_pedido" , referencedColumnName = "id")
     private Pedido pedido;
