@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/hint_login"
-            android:inputType="textPersonName" />
+            android:inputType="textEmailAddress" />
 
         <EditText
             android:id="@+id/txtPassword"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/hint_password"
-            android:inputType="textPersonName" />
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/btnEntrar"
@@ -45,15 +45,18 @@
             android:text="Entrar"
             android:textColor="@color/colorTextBtn"
             tools:text="@string/btn_login"
+            android:layout_margin="16dp"
             android:layout_marginTop="10dp"/>
+
         <Button
             android:id="@+id/btnCadastro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/primaryButton"
-            android:text="Entrar"
-            android:textColor="@color/colorTextBtn"
-            tools:text="@string/btn_login"
-            android:layout_marginTop="10dp"/>
+            android:layout_margin="16dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorTextBtn"
+            android:text="Cadastrar"
+            android:textColor="@color/colorPrimary"
+            tools:text="@string/btn_login" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
