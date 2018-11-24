@@ -1,6 +1,7 @@
 package com.example.easypark.easyparkfinal.activity;
 
 import android.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,16 +37,26 @@ public class ListActivity extends AppCompatActivity {
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("trucks", new TruckListSerializable(foodTrucks));
 
+
+
+
+
                     FoodTruckListFragment fragment = new FoodTruckListFragment();
                     fragment.setArguments(bundle);
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.main_container, fragment);
+                    ft.addToBackStack("ListFragment");
+                    ft.commit();
+                    /*
                     getSupportFragmentManager().beginTransaction().replace(R.id.main_container,
                             fragment).commit();
-                    getSupportFragmentManager().executePendingTransactions();
+                            */
+                    //getSupportFragmentManager().executePendingTransactions();
                 }
 
                 @Override
                 public void onFailure(Call<List<Truck>> call, Throwable t) {
-                    
+
                 }
             });
         }

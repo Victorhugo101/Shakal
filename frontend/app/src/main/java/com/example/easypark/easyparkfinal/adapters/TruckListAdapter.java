@@ -3,6 +3,7 @@ package com.example.easypark.easyparkfinal.adapters;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,8 +57,10 @@ public class TruckListAdapter extends RecyclerView.Adapter
                                      ProdutoService.converterParaProduto(response)));
                              ProdutoListFragment fragment = new ProdutoListFragment();
                              fragment.setArguments(bundle);
-                             fragmento.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container,
-                                     fragment).commit();
+                             FragmentTransaction ft = fragmento.getActivity().getSupportFragmentManager().beginTransaction();
+                             ft.replace(R.id.main_container, fragment);
+                             ft.addToBackStack("ListSelecionarTruck");
+                             ft.commit();
                          }
 
                          @Override

@@ -40,7 +40,7 @@ public class PedidoListAdapter extends  RecyclerView.Adapter<PedidoListAdapter.P
     public void onBindViewHolder(@NonNull PedidoViewHolder pedidoViewHolder, int i) {
         pedidoViewHolder.nomeTruck.setText(this.pedidos.get(i).getNomeTruck());
         //pedidoViewHolder.setText(Double.toString(this.pedidos.get(i).getPreco()));
-        pedidoViewHolder.status.setText(this.pedidos.get(i).getStatus());
+        pedidoViewHolder.status.setText("Status: " + this.pedidos.get(i).getStatus());
     }
 
     @Override

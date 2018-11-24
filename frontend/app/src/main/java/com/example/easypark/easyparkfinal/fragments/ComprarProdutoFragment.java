@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,8 +85,10 @@ public class ComprarProdutoFragment extends Fragment {
                 bundle.putSerializable("quantidade",quantidade);
                 CarrinhoFragment fragment =  CarrinhoFragment.getInstance();
                 fragment.setArguments(bundle);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container,
-                        fragment).commit();
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.main_container, fragment);
+                ft.addToBackStack("ComprarProdutoFragment");
+                ft.commit();
             }
         });
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,9 +55,16 @@ public class ProdutoListAdapter extends RecyclerView.Adapter<ProdutoListAdapter.
         Bundle bundle = new Bundle();
         bundle.putSerializable("produto", this.produtos.get(position));
         ComprarProdutoFragment fragment = new ComprarProdutoFragment();
+        /*
         fragment.setArguments(bundle);
         fragmento.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container,
                 fragment).commit();
+    */
+        fragment.setArguments(bundle);
+        FragmentTransaction ft = fragmento.getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.main_container, fragment);
+        ft.addToBackStack("ListComprarProduto");
+        ft.commit();
     }
 
     public class ProdutoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
