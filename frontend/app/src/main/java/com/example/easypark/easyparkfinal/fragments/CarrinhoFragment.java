@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.easypark.easyparkfinal.R;
 import com.example.easypark.easyparkfinal.adapters.CarrinhoListAdapter;
@@ -26,9 +28,11 @@ public class CarrinhoFragment extends Fragment {
 
     private List<ProdutoPedido> produtosPedidos;
     private RecyclerView recyclerView;
+    private Button btnConfirmarCompra;
     private static CarrinhoFragment instance;
 
-    private CarrinhoFragment() {
+
+    public CarrinhoFragment() {
         produtosPedidos = new ArrayList<>();
     }
 
@@ -57,6 +61,7 @@ public class CarrinhoFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
        View view =  inflater.inflate(R.layout.fragment_carrinho, container, false);
+       btnConfirmarCompra = (Button) view.findViewById(R.id.btnConfirmarCompra);
        recyclerView = (RecyclerView) view.findViewById(R.id.rv_lista_carrinho);
 
 
@@ -64,7 +69,6 @@ public class CarrinhoFragment extends Fragment {
        Bundle bundle = getArguments();
        Produto produto = ((Produto) bundle.getSerializable("produto"));
        int quantidade = (int) bundle.getSerializable("quantidade");
-       //produtosPedidos = new ArrayList<>();
        this.produtosPedidos.add(new ProdutoPedido(produto.getId(),produto.getNome(),produto.getValor(),quantidade));
 
         LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
@@ -73,8 +77,21 @@ public class CarrinhoFragment extends Fragment {
 
         CarrinhoListAdapter adapter = new CarrinhoListAdapter(this.getContext(),produtosPedidos);
         recyclerView.setAdapter(adapter);
+
+        btnConfirmarCompra.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                confirmarCompra();
+
+            }
+        });
         return view;
     }
 
+    private boolean confirmarCompra(){
+        Toast.makeText(this.getContext(),"Compra confirmada",Toast.LENGTH_SHORT).show();
+        return true;
+    }
 
 }
