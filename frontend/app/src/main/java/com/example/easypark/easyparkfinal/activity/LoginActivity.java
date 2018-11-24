@@ -12,6 +12,7 @@ import com.example.easypark.easyparkfinal.R;
 public class LoginActivity extends AppCompatActivity {
 
     private Button btnEntrar;
+    private Button btnCadastro;
     private EditText txtLogin;
     private EditText txtPassword;
 
@@ -23,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
         btnEntrar = (Button)findViewById(R.id.btnEntrar);
         txtLogin = (EditText)findViewById(R.id.txtLogin);
         txtPassword = (EditText) findViewById(R.id.txtPassword);
+        btnCadastro = (Button) findViewById(R.id.btnCadastro);
 
 
         btnEntrar.setOnClickListener(new View.OnClickListener() {
@@ -34,12 +36,27 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        btnCadastro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                setBtnCadastro();
+
+            }
+        });
+
     }
 
     private void validate(){
         txtLogin.setText("");
         txtPassword.setText("");
         Intent myIntent = new Intent(this, ValidationActivity.class);
+        startActivity(myIntent);
+    }
+    private void setBtnCadastro(){
+        txtLogin.setText("");
+        txtPassword.setText("");
+        Intent myIntent = new Intent(this, CadastroActivity.class);
         startActivity(myIntent);
     }
 }

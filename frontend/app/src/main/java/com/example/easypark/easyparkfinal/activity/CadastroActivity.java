@@ -41,7 +41,7 @@ public class CadastroActivity extends AppCompatActivity {
         txtNomeCadastro.setText("");
         txtEmail.setText("");
         txtPassword.setText("");
-        Intent myIntent = new Intent(this, ValidationActivity.class);
+        Intent myIntent = new Intent(this, LoginActivity.class);
         startActivity(myIntent);
     }
 }

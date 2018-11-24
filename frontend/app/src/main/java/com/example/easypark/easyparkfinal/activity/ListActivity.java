@@ -1,5 +1,6 @@
 package com.example.easypark.easyparkfinal.activity;
 
+import android.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,11 +40,12 @@ public class ListActivity extends AppCompatActivity {
                     fragment.setArguments(bundle);
                     getSupportFragmentManager().beginTransaction().replace(R.id.main_container,
                             fragment).commit();
+                    getSupportFragmentManager().executePendingTransactions();
                 }
 
                 @Override
                 public void onFailure(Call<List<Truck>> call, Throwable t) {
-
+                    
                 }
             });
         }
@@ -58,16 +60,24 @@ public class ListActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        int count = getFragmentManager().getBackStackEntryCount();
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0){
+
+            boolean done = getSupportFragmentManager().popBackStackImmediate();
+        }
+        else{
+            super.onBackPressed();
+        }
+
+        /*
+        int count = getSupportFragmentManager().getBackStackEntryCount();
         Log.d("Ch", "Chupa meu pinto então, seu vagabundo");
         if (count == 0) {
             super.onBackPressed();
             //additional code
         } else {
             getFragmentManager().popBackStack();
-        }
+        }*/
 
     }
-
 
 }
