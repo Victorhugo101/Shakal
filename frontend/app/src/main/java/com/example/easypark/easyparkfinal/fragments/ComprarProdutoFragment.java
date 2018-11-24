@@ -15,6 +15,7 @@ import com.example.easypark.easyparkfinal.R;
 import com.example.easypark.easyparkfinal.beans.Produto;
 import com.example.easypark.easyparkfinal.beans.ProdutoListSerializable;
 import com.example.easypark.easyparkfinal.beans.Truck;
+import com.example.easypark.easyparkfinal.beans.TruckListSerializable;
 
 
 public class ComprarProdutoFragment extends Fragment {
@@ -24,6 +25,11 @@ public class ComprarProdutoFragment extends Fragment {
     private TextView txtvNomeTruck;
     private TextView txtvNomeProduto;
     private TextView txtvPreco;
+    private Button btnMenos;
+    private Button btnMais;
+    private Button btnAdcionarAoCarrinho;
+    private TextView txtvQuantidade;
+    private int quantidade = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,11 +46,49 @@ public class ComprarProdutoFragment extends Fragment {
         txtvNomeTruck = (TextView) view.findViewById(R.id.nomeFoodTruckDetalhesProduto);
         txtvNomeProduto = (TextView) view.findViewById(R.id.nomeProdutoDetalhes);
         txtvPreco = (TextView) view.findViewById(R.id.precoProdutoDetalhes);
+        btnMenos = (Button) view.findViewById(R.id.btnMenosProduto);
+        btnMais = (Button) view.findViewById(R.id.btnMaisProduto);
+        txtvQuantidade = (TextView) view.findViewById(R.id.qtdProduto);
+        btnAdcionarAoCarrinho = (Button) view.findViewById(R.id.btnAdcionarAoCarrinho);
+
 
         Bundle bundle = getArguments();
         produto = ((Produto) bundle.getSerializable("produto"));
         txtvNomeProduto.setText(produto.getNome());
         txtvPreco.setText("R$ " + String.valueOf(produto.getValor()));
+        btnAdcionarAoCarrinho.setText("Adcionar ao carrinho R$ " + String.valueOf(produto.getValor() * quantidade));
+
+        btnMenos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(quantidade > 1){
+                    quantidade--;
+                    txtvQuantidade.setText(String.valueOf(quantidade));
+                    btnAdcionarAoCarrinho.setText("Adcionar ao carrinho R$ " + String.valueOf(produto.getValor() * quantidade));
+                }
+            }
+        });
+        btnMais.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    quantidade++;
+                    txtvQuantidade.setText(String.valueOf(quantidade));
+                btnAdcionarAoCarrinho.setText("Adcionar ao carrinho R$ " + String.valueOf(produto.getValor() * quantidade));
+            }
+        });
+        btnAdcionarAoCarrinho.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("produto",produto);
+                bundle.putSerializable("quantidade",quantidade);
+                CarrinhoFragment fragment =  CarrinhoFragment.getInstance();
+                fragment.setArguments(bundle);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container,
+                        fragment).commit();
+            }
+        });
+
         return view;
     }
 

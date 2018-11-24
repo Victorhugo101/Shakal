@@ -25,28 +25,49 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
+        if(savedInstanceState == null) {
+            Call call = TruckService.listarTrcksPerto();
+            call.enqueue(new Callback<List<Truck>>() {
 
-        Call call = TruckService.listarTrcksPerto();
-        call.enqueue(new Callback<List<Truck>>() {
+                @Override
+                public void onResponse(Call<List<Truck>> call, Response<List<Truck>> response) {
+                    List<Truck> foodTrucks = TruckService.converterParaTruck(response);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("trucks", new TruckListSerializable(foodTrucks));
 
-            @Override
-            public void onResponse(Call<List<Truck>> call, Response<List<Truck>> response) {
-                List<Truck> foodTrucks = TruckService.converterParaTruck(response);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("trucks",new TruckListSerializable(foodTrucks));
+                    FoodTruckListFragment fragment = new FoodTruckListFragment();
+                    fragment.setArguments(bundle);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.main_container,
+                            fragment).commit();
+                }
 
-                FoodTruckListFragment fragment = new FoodTruckListFragment();
-                fragment.setArguments(bundle);
-                getSupportFragmentManager().beginTransaction().replace(R.id.main_container,
-                        fragment).commit();
-            }
+                @Override
+                public void onFailure(Call<List<Truck>> call, Throwable t) {
 
-            @Override
-            public void onFailure(Call<List<Truck>> call, Throwable t) {
-
-            }
-        });
+                }
+            });
+        }
 
     }
+    @Override
+    public void onSaveInstanceState(Bundle outState){
+        //super(outState);
+        outState.putBoolean("currentInstance",true);
+        super.onSaveInstanceState(outState);
+    }
+    @Override
+    public void onBackPressed() {
+
+        int count = getFragmentManager().getBackStackEntryCount();
+        Log.d("Ch", "Chupa meu pinto então, seu vagabundo");
+        if (count == 0) {
+            super.onBackPressed();
+            //additional code
+        } else {
+            getFragmentManager().popBackStack();
+        }
+
+    }
+
 
 }
