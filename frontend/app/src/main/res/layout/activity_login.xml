@@ -25,6 +25,8 @@
             android:id="@+id/txtLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:ems="10"
             android:hint="@string/hint_login"
             android:inputType="textEmailAddress" />
@@ -35,6 +37,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/hint_password"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:inputType="textPassword" />
 
         <Button
@@ -43,8 +47,8 @@
             android:layout_height="wrap_content"
             android:background="@color/primaryButton"
             android:text="Entrar"
-            android:textColor="@color/colorTextBtn"
             tools:text="@string/btn_login"
+            android:textColor="@color/colorTextBtn"
             android:layout_margin="16dp"
             android:layout_marginTop="10dp"/>
 
@@ -54,9 +58,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:layout_marginTop="10dp"
-            android:background="@color/colorTextBtn"
+            android:background="@color/colorPrimary"
             android:text="Cadastrar"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorTextBtn"
             tools:text="@string/btn_login" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

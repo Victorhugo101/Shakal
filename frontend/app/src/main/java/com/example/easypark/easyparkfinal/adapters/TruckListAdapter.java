@@ -3,7 +3,6 @@ package com.example.easypark.easyparkfinal.adapters;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,15 +13,11 @@ import com.example.easypark.easyparkfinal.R;
 import com.example.easypark.easyparkfinal.beans.Produto;
 import com.example.easypark.easyparkfinal.beans.ProdutoListSerializable;
 import com.example.easypark.easyparkfinal.beans.Truck;
-import com.example.easypark.easyparkfinal.beans.TruckListSerializable;
-import com.example.easypark.easyparkfinal.fragments.FoodTruckListFragment;
 import com.example.easypark.easyparkfinal.fragments.ProdutoListFragment;
 import com.example.easypark.easyparkfinal.network.ProdutoService;
 
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -78,7 +73,7 @@ public class TruckListAdapter extends RecyclerView.Adapter
 
     @Override
     public FoodTruckViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = mLayoutInflater.inflate(R.layout.fragment_truck_list_cell, parent, false);
+        View v = mLayoutInflater.inflate(R.layout.fragment_truck_list_row, parent, false);
         return  new FoodTruckViewHolder(v);
 
     }
