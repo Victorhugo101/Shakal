@@ -40,7 +40,7 @@ public class CarrinhoListAdapter extends RecyclerView.Adapter<CarrinhoListAdapte
 
         carrinhoViewHolder.nomeProduto.setText(this.produtosPedidos.get(i).getNome());
         carrinhoViewHolder.valor.setText("R$ "+ Double.toString(this.produtosPedidos.get(i).getValor()));
-        carrinhoViewHolder.quantidade.setText(Long.toString(this.produtosPedidos.get(i).getQuantidade()));
+        carrinhoViewHolder.quantidade.setText("Quantidade: " + Long.toString(this.produtosPedidos.get(i).getQuantidade()));
     }
 
     @Override

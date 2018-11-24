@@ -9,7 +9,7 @@
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_gravity="left"
-        android:src="@drawable/logo_easypark"
+        android:src="@drawable/burger_siri"
         android:gravity="left"
         android:layout_weight="0"/>
 

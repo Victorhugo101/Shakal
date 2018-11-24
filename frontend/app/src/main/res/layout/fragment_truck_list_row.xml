@@ -18,7 +18,7 @@
             android:layout_height="32dp"
             android:layout_weight="0"
             android:layout_gravity="left"
-            android:src="@drawable/logo_easypark"
+            android:src="@drawable/siri_cascudo"
             android:gravity="left"/>
 
         <TextView

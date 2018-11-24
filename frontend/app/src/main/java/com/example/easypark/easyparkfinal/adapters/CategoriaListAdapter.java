@@ -30,7 +30,7 @@ public class CategoriaListAdapter extends RecyclerView.Adapter
 
     @Override
     public CategoriaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = mLayoutInflater.inflate(R.layout.fragment_truck_list_cell, parent, false);
+        View v = mLayoutInflater.inflate(R.layout.fragment_truck_list_row, parent, false);
         return  new CategoriaViewHolder(v);
 
     }
