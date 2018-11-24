@@ -53,7 +53,14 @@ public class Pedido {
 		this.mesa = mesa;
 		this.status = 1;
 	}
-
+	public Pedido(int status, Cliente cliente, Mesa mesa) {
+		super();
+		this.status = status;
+		this.cliente = cliente;
+		this.produtos = new ArrayList<>();
+		this.mesa = mesa;
+		this.status = 1;
+	}
 
 	public Long getId() {
 		return id;

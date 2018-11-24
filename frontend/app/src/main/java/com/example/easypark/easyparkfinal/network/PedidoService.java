@@ -2,11 +2,14 @@ package com.example.easypark.easyparkfinal.network;
 
 import com.example.easypark.easyparkfinal.beans.Pedido;
 import com.example.easypark.easyparkfinal.beans.PedidoDTO;
+import com.example.easypark.easyparkfinal.beans.PedidoListView;
 import com.example.easypark.easyparkfinal.utils.Constants;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -25,17 +28,26 @@ public class PedidoService {
         BackendAPI service = retrofit.create(BackendAPI.class);
         return service.cadastrarPedido(pedidoDTO);
     }
-    /*
-    public static List<Produto> converterParaProduto(Response<List<Produto>> lista){
-        List<Produto> produtos = new ArrayList<>();
+
+    public static Call<List<PedidoListView>> listarMeusPedidos(long id){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        BackendAPI service = retrofit.create(BackendAPI.class);
+        return service.listarMeusPedidos(id);
+    }
+
+    public static List<PedidoListView> converterParaPedidoListView(Response<List<PedidoListView>> lista){
+        List<PedidoListView> pedidos = new ArrayList<>();
         for (int i = 0; i < lista.body().size(); i++){
-            produtos.add(new Produto(
+            pedidos.add(new PedidoListView(
                     lista.body().get(i).getId(),
-                    lista.body().get(i).getNome(),
-                    lista.body().get(i).getValor()
+                    lista.body().get(i).getNomeTruck(),
+                    lista.body().get(i).getStatus()
             ));
         }
-        return produtos;
+        return pedidos;
     }
-    */
+
 }

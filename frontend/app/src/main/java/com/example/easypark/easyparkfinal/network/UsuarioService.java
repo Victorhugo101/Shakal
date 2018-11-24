@@ -9,7 +9,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class UsuarioService {
-    public static Call<Boolean> logarUsuario(LoginDTO login){
+    public static Call<Cliente> logarUsuario(LoginDTO login){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())

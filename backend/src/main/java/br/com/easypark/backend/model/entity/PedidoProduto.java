@@ -3,6 +3,7 @@ package br.com.easypark.backend.model.entity;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,16 +15,20 @@ import javax.validation.constraints.NotBlank;
 public class PedidoProduto implements Serializable{
 
 	@Id
+	@GeneratedValue
+	private long id;
+	
+
     @ManyToOne(targetEntity = Produto.class)
     @JoinColumn(name = "id_produto" , referencedColumnName = "id")
     private Produto produto;
 
-	@Id
+
     @ManyToOne(targetEntity = Pedido.class)
     @JoinColumn(name = "id_pedido" , referencedColumnName = "id")
     private Pedido pedido;
     
-    @NotBlank
+   
     private int quantidade;
     
     
@@ -33,6 +38,20 @@ public class PedidoProduto implements Serializable{
 		this.pedido = pedido;
 		this.quantidade = quantidade;
 	}
+
+	
+	
+	public long getId() {
+		return id;
+	}
+
+
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+
 
 	public Produto getProduto() {
 		return produto;

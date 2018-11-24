@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.easypark.easyparkfinal.R;
-import com.example.easypark.easyparkfinal.beans.Pedido;
+import com.example.easypark.easyparkfinal.beans.PedidoListView;
 
 
 import java.util.List;
@@ -21,10 +21,10 @@ import java.util.List;
 
 public class PedidoListAdapter extends  RecyclerView.Adapter<PedidoListAdapter.PedidoViewHolder> {
 
-    private List<Pedido> pedidos;
+    private List<PedidoListView> pedidos;
     private LayoutInflater mLayoutInflater;
 
-    public PedidoListAdapter(Context c, List<Pedido> l){
+    public PedidoListAdapter(Context c, List<PedidoListView> l){
         pedidos = l;
         mLayoutInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -32,14 +32,14 @@ public class PedidoListAdapter extends  RecyclerView.Adapter<PedidoListAdapter.P
     @NonNull
     @Override
     public PedidoViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return null;
+        View v = mLayoutInflater.inflate(R.layout.fragment_pedido_list_row, viewGroup, false);
+        return  new PedidoViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull PedidoViewHolder pedidoViewHolder, int i) {
-        pedidoViewHolder.nomeProduto.setText(this.pedidos.get(i).getNome());
-        pedidoViewHolder.valor.setText(Double.toString(this.pedidos.get(i).getPreco()));
-        pedidoViewHolder.quantidade.setText(this.pedidos.get(i).getQuantidade());
+        pedidoViewHolder.nomeTruck.setText(this.pedidos.get(i).getNomeTruck());
+        //pedidoViewHolder.setText(Double.toString(this.pedidos.get(i).getPreco()));
         pedidoViewHolder.status.setText(this.pedidos.get(i).getStatus());
     }
 
@@ -51,18 +51,14 @@ public class PedidoListAdapter extends  RecyclerView.Adapter<PedidoListAdapter.P
     public class PedidoViewHolder extends RecyclerView.ViewHolder{
 
         public ImageView nomeImagem;
-        public TextView nomeProduto;
-        public TextView valor;
-        public TextView quantidade;
+        public TextView nomeTruck;
         public TextView status;
 
         public PedidoViewHolder(View itemView) {
             super(itemView);
 
-            nomeImagem = (ImageView) itemView.findViewById(R.id.imgProduto);
-            nomeProduto = (TextView) itemView.findViewById(R.id.nomeProduto);
-            valor = (TextView) itemView.findViewById(R.id.precoProduto);
-            quantidade = (TextView) itemView.findViewById(R.id.quantidadeProdutoCarrinho);
+            nomeImagem = (ImageView) itemView.findViewById(R.id.imgProdutoPedido);
+            nomeTruck = (TextView) itemView.findViewById(R.id.nomeFoodTruckPedido);
             status = (TextView) itemView.findViewById(R.id.statusProdutoPedido);
 
 

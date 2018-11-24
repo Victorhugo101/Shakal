@@ -2,6 +2,7 @@ package com.example.easypark.easyparkfinal.beans;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Renilson Albuquerque on 24/11/2018.
@@ -12,9 +13,9 @@ public class PedidoDTO implements Serializable {
 
     private long cliente;
     private long mesa;
-    private HashMap<Long,Long> produtos;
+    private List<ProdutoQuantidadeDTO> produtos;
 
-    public PedidoDTO( long cliente, long mesa, HashMap<Long, Long> produtos) {
+    public PedidoDTO( long cliente, long mesa,List<ProdutoQuantidadeDTO> produtos) {
         this.cliente = cliente;
         this.mesa = mesa;
         this.produtos = produtos;
@@ -36,11 +37,11 @@ public class PedidoDTO implements Serializable {
         this.mesa = mesa;
     }
 
-    public HashMap<Long, Long> getProdutos() {
+    public List<ProdutoQuantidadeDTO> getProdutos() {
         return produtos;
     }
 
-    public void setProdutos(HashMap<Long, Long> produtos) {
+    public void setProdutos(List<ProdutoQuantidadeDTO> produtos) {
         this.produtos = produtos;
     }
 }

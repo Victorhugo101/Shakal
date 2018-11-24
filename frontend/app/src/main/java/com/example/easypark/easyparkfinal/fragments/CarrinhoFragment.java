@@ -16,11 +16,15 @@ import android.widget.Toast;
 import com.example.easypark.easyparkfinal.R;
 import com.example.easypark.easyparkfinal.adapters.CarrinhoListAdapter;
 import com.example.easypark.easyparkfinal.beans.PedidoDTO;
+import com.example.easypark.easyparkfinal.beans.PedidoListSerializable;
+import com.example.easypark.easyparkfinal.beans.PedidoListView;
 import com.example.easypark.easyparkfinal.beans.Produto;
 import com.example.easypark.easyparkfinal.beans.ProdutoPedido;
+import com.example.easypark.easyparkfinal.beans.ProdutoQuantidadeDTO;
 import com.example.easypark.easyparkfinal.beans.Truck;
 import com.example.easypark.easyparkfinal.beans.TruckListSerializable;
 import com.example.easypark.easyparkfinal.network.PedidoService;
+import com.example.easypark.easyparkfinal.network.TruckService;
 import com.example.easypark.easyparkfinal.network.UsuarioService;
 
 import java.util.ArrayList;
@@ -30,6 +34,8 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 public class CarrinhoFragment extends Fragment {
@@ -98,11 +104,12 @@ public class CarrinhoFragment extends Fragment {
     }
 
     private boolean confirmarCompra(){
-        HashMap<Long,Long> produtos = new HashMap<Long, Long>();
+        long usuario = getActivity().getSharedPreferences("usuario",MODE_PRIVATE).getInt("id",1);
+        List<ProdutoQuantidadeDTO> produtos = new ArrayList<ProdutoQuantidadeDTO>();
         for(ProdutoPedido p :this.produtosPedidos){
-            produtos.put(p.getId(), (long) p.getQuantidade());
+            produtos.add(new ProdutoQuantidadeDTO(p.getId(), (long) p.getQuantidade()));
         }
-        PedidoDTO pedidoDTO = new PedidoDTO(1L,1L,produtos);
+        PedidoDTO pedidoDTO = new PedidoDTO(usuario,1L,produtos);
         Call call = PedidoService.cadastrarPedido(pedidoDTO);
         call.enqueue(new Callback<Boolean>() {
 
@@ -110,6 +117,8 @@ public class CarrinhoFragment extends Fragment {
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if (response.body()==true){
                     exibirMensagem("Pedido finalizado");
+                    goToPreviewList();
+
                 }else{
                     exibirMensagem("Erro ao cadastrar o pedido");
                 }
@@ -127,6 +136,35 @@ public class CarrinhoFragment extends Fragment {
     }
     public void exibirMensagem(String mensagem){
         Toast.makeText(this.getContext(),mensagem,Toast.LENGTH_SHORT).show();
+    }
+    public void goToPreviewList(){
+        Call call = PedidoService.listarMeusPedidos(getActivity().getSharedPreferences("usuario",MODE_PRIVATE).getInt("id",1));
+        call.enqueue(new Callback<List<PedidoListView>>() {
+
+            @Override
+            public void onResponse(Call<List<PedidoListView>> call, Response<List<PedidoListView>> response) {
+                changeFragment(PedidoService.converterParaPedidoListView(response));
+
+
+            }
+
+            @Override
+            public void onFailure(Call<List<PedidoListView>> call, Throwable t) {
+
+                exibirMensagem("Erro ao cadastrar o seu pedido");
+            }
+
+        });
+    }
+    public void changeFragment(List<PedidoListView> pedidos){
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("pedidos", new PedidoListSerializable(pedidos));
+
+        ListaPedidosFragments fragment = new ListaPedidosFragments();
+        fragment.setArguments(bundle);
+        this.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_container,
+                fragment).commit();
+        this.getActivity().getSupportFragmentManager().executePendingTransactions();
     }
 
 }

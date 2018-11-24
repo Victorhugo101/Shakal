@@ -9,11 +9,15 @@ import org.springframework.stereotype.Service;
 import br.com.easypark.backend.data.ClienteDAO;
 import br.com.easypark.backend.data.MesaDAO;
 import br.com.easypark.backend.data.PedidoDAO;
+import br.com.easypark.backend.data.PedidoProdutoDAO;
 import br.com.easypark.backend.data.ProdutoDAO;
 import br.com.easypark.backend.model.dto.PedidoEntradaDTO;
+import br.com.easypark.backend.model.dto.PedidoSaidaDTO;
+import br.com.easypark.backend.model.dto.ProdutoQuantidadeDTO;
 import br.com.easypark.backend.model.entity.Cliente;
 import br.com.easypark.backend.model.entity.Mesa;
 import br.com.easypark.backend.model.entity.Pedido;
+import br.com.easypark.backend.model.entity.PedidoProduto;
 import br.com.easypark.backend.model.entity.Produto;
 
 @Service
@@ -31,21 +35,37 @@ public class PedidoService {
 	@Autowired
 	private MesaDAO mesaDAO;
 	
+	@Autowired
+	private PedidoProdutoDAO pedidoProdutoDAO;
+	
 	public boolean save(PedidoEntradaDTO pedidoEntradaDTO) {
 		
 		Pedido p;
 		Cliente cliente = clienteDAO.findById(pedidoEntradaDTO.getCliente()).get();
 		Mesa m = mesaDAO.findById(pedidoEntradaDTO.getMesa()).get();
-		List<Produto> produtos = new ArrayList<>();
-		
-		for(short i = 0; i < pedidoEntradaDTO.getProdutos().size(); i++) {
-			System.out.println(pedidoEntradaDTO.getProdutos());
-			produtos.add(produtoDAO.getOne(pedidoEntradaDTO.getProdutos().get(i)));
-		}
-		
-		p = new Pedido(0,cliente, produtos,m);
+		p = new Pedido(0,cliente,m);
 		p.setStatus(1);
 		pedidoDAO.save(p);
+		
+		//List<PedidoProduto> produtos = new ArrayList<>();
+		for(ProdutoQuantidadeDTO produto: pedidoEntradaDTO.getProdutos()) {
+			pedidoProdutoDAO.save(new PedidoProduto(
+					produtoDAO.getOne(produto.getProduto()) , p,produto.getQuantidade().intValue() ) );
+		}
 		return true;
+	}
+	
+	public List<PedidoSaidaDTO> listarMeusPedidos(Long id){
+		List<PedidoSaidaDTO> pedidos = new ArrayList<PedidoSaidaDTO>();
+		for(Pedido p: this.pedidoDAO.findAll()) {
+			if(p.getCliente().getId() == id) {
+				pedidos.add(new PedidoSaidaDTO(p.getId(),
+						(p.getProdutos().size() > 0)? p.getProdutos().get(0).getTruck().getNomeFantasia() : "String teste",
+						"Preparando"));
+			}
+			
+		}
+		return pedidos;
+		
 	}
 }

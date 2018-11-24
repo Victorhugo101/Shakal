@@ -2,6 +2,7 @@ package br.com.easypark.backend.model.dto;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 
 public class PedidoEntradaDTO implements Serializable{
 
@@ -10,13 +11,13 @@ public class PedidoEntradaDTO implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private Long cliente;
-	private HashMap<Long,Long> produtos;
+	private List<ProdutoQuantidadeDTO> produtos;
 	private Long mesa;
 	
 	public PedidoEntradaDTO() {
 		
 	}
-	public PedidoEntradaDTO(Long cliente, HashMap<Long,Long> produtos, Long mesa) {
+	public PedidoEntradaDTO(Long cliente, List<ProdutoQuantidadeDTO> produtos, Long mesa) {
 		super();
 		this.cliente = cliente;
 		this.produtos = produtos;
@@ -31,16 +32,15 @@ public class PedidoEntradaDTO implements Serializable{
 		this.cliente = cliente;
 	}
 	
-	public HashMap<Long, Long> getProdutos() {
+	
+
+
+	public List<ProdutoQuantidadeDTO> getProdutos() {
 		return produtos;
 	}
-
-
-	public void setProdutos(HashMap<Long, Long> produtos) {
+	public void setProdutos(List<ProdutoQuantidadeDTO> produtos) {
 		this.produtos = produtos;
 	}
-
-
 	public long getMesa() {
 		return mesa;
 	}

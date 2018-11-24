@@ -1,6 +1,7 @@
 package com.example.easypark.easyparkfinal.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -59,19 +60,27 @@ public class LoginActivity extends AppCompatActivity {
     private void validate(){
         LoginDTO login = new LoginDTO(txtLogin.getText().toString(), txtPassword.getText().toString());
         Call call = UsuarioService.logarUsuario(login);
-        call.enqueue(new Callback<Boolean>() {
+        call.enqueue(new Callback<Cliente>() {
 
             @Override
-            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                if (response.body()==true){
+            public void onResponse(Call<Cliente> call, Response<Cliente> response) {
+                if(response.body().getId() > 0){
+
+                    SharedPreferences sp = getSharedPreferences("usuario", MODE_PRIVATE);
+                    SharedPreferences.Editor ed = sp.edit();
+                    ed.putInt("id", response.body().getId().intValue());
+                    ed.putString("nome", response.body().getNome());
+                    ed.putString("email", response.body().getEmail());
+                    ed.commit();
                     goToQrCode();
-                }else exibirMensagem("E-mail ou senha inválido!");
+                }
+                else exibirMensagem("E-mail ou senha inválido!");
 
             }
 
             @Override
-            public void onFailure(Call<Boolean> call, Throwable t) {
-                exibirMensagem("Erro teste");
+            public void onFailure(Call<Cliente> call, Throwable t) {
+                exibirMensagem("Erro ao conectar com o servidor");
             }
 
         });

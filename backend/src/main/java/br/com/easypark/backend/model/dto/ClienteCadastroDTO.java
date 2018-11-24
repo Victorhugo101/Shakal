@@ -2,7 +2,7 @@ package br.com.easypark.backend.model.dto;
 
 import java.io.Serializable;
 
-public class ClienteDTO implements Serializable {
+public class ClienteCadastroDTO implements Serializable {
 	
 	/**
 	 * 
@@ -15,16 +15,23 @@ public class ClienteDTO implements Serializable {
 	
 	
 	
-	public ClienteDTO() {
+	public ClienteCadastroDTO() {
 		
 	}
 	
-	public ClienteDTO(Long id, String nome, String email, String senha) {
+	public ClienteCadastroDTO(Long id, String nome, String email, String senha) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
+	}
+	public ClienteCadastroDTO(Long id, String nome, String email) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.email = email;
+		this.senha = "";
 	}
 	
 	public Long getId() {
