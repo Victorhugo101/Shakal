@@ -6,8 +6,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.easypark.easyparkfinal.R;
+import com.example.easypark.easyparkfinal.beans.Cliente;
+import com.example.easypark.easyparkfinal.beans.LoginDTO;
+import com.example.easypark.easyparkfinal.network.ClienteService;
+import com.example.easypark.easyparkfinal.network.UsuarioService;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -48,10 +57,25 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void validate(){
-        txtLogin.setText("");
-        txtPassword.setText("");
-        Intent myIntent = new Intent(this, ValidationActivity.class);
-        startActivity(myIntent);
+        LoginDTO login = new LoginDTO(txtLogin.getText().toString(), txtPassword.getText().toString());
+        Call call = UsuarioService.logarUsuario(login);
+        call.enqueue(new Callback<Boolean>() {
+
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if (response.body()==true){
+                    goToQrCode();
+                }else exibirMensagem("E-mail ou senha inválido!");
+
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                exibirMensagem("Erro teste");
+            }
+
+        });
+
     }
     private void setBtnCadastro(){
         txtLogin.setText("");
@@ -59,4 +83,11 @@ public class LoginActivity extends AppCompatActivity {
         Intent myIntent = new Intent(this, CadastroActivity.class);
         startActivity(myIntent);
     }
+      public void exibirMensagem(String mensagem){
+        Toast.makeText(this,mensagem,Toast.LENGTH_SHORT).show();
+        }
+        private void goToQrCode(){
+            Intent myIntent = new Intent(this, ValidationActivity.class);
+            startActivity(myIntent);
+}
 }

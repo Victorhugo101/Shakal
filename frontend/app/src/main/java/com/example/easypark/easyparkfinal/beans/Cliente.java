@@ -1,24 +1,19 @@
 package com.example.easypark.easyparkfinal.beans;
 
-public class Cliente {
+import java.io.Serializable;
 
-    private long id;
+public class Cliente implements Serializable {
+
+    private Long id;
     private String nome;
     private String email;
     private String senha;
 
-    public Cliente(long id, String nome, String email, String senha) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-    }
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -43,6 +38,14 @@ public class Cliente {
     }
 
     public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public Cliente(Long id, String nome, String email, String senha) {
+        this.id = id;
+        this.nome = nome;
+
+        this.email = email;
         this.senha = senha;
     }
 }
