@@ -51,7 +51,7 @@ public class ProdutoListFragment extends Fragment implements RecycleViewClickLis
         ProdutoListAdapter adapter = new ProdutoListAdapter(this.getContext(),tls );
         adapter.setContatoRecycleViewOnClick(this);
         recyclerView.setAdapter(adapter);
-        
+
         return view;
     }
 
@@ -61,5 +61,6 @@ public class ProdutoListFragment extends Fragment implements RecycleViewClickLis
         ProdutoListAdapter adapter = (ProdutoListAdapter) recyclerView.getAdapter();
         adapter.chamaProximoFragmento(position,this);
     }
+
 
 }
