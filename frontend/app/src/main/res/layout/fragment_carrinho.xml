@@ -2,17 +2,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="8dp"
+    android:orientation="vertical"
     tools:context="com.example.easypark.easyparkfinal.fragments.CarrinhoFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_lista_carrinho"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginVertical="8dp">
-
-
+        android:layout_height="match_parent">
+        <!--android:layout_marginVertical="8dp" -->
 
     </android.support.v7.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/btnConfirmarCompra"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="Confirmar compra"
+        android:layout_gravity="bottom"
+        android:background="@color/primaryButton"
+        android:textColor="@color/colorTextBtn"/>
 
 </FrameLayout>
