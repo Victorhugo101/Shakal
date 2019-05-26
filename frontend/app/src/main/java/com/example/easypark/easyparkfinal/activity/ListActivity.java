@@ -81,7 +81,7 @@ public class ListActivity extends AppCompatActivity {
 
         /*
         int count = getSupportFragmentManager().getBackStackEntryCount();
-        Log.d("Ch", "Chupa meu pinto então, seu vagabundo");
+        Log.d("Ch",");
         if (count == 0) {
             super.onBackPressed();
             //additional code

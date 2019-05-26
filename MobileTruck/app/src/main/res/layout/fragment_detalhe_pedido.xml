@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.DetalhePedidoFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Pedido 65" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_lista_produtos"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="8dp"/>
+
+    <Button
+        android:id="@+id/btnFinalizarPedido"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="Finalizar Pedido"
+        android:layout_gravity="bottom"
+        android:background="@color/primaryButton"
+        android:textColor="@color/colorTextBtn"/>
+
+</FrameLayout>

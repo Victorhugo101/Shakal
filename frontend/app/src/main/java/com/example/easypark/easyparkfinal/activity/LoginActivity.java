@@ -1,7 +1,9 @@
 package com.example.easypark.easyparkfinal.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +16,7 @@ import com.example.easypark.easyparkfinal.beans.Cliente;
 import com.example.easypark.easyparkfinal.beans.LoginDTO;
 import com.example.easypark.easyparkfinal.network.ClienteService;
 import com.example.easypark.easyparkfinal.network.UsuarioService;
+import com.example.easypark.easyparkfinal.utils.Constants;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -54,6 +57,8 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
+            this.showIPDialog();
 
     }
 
@@ -99,4 +104,22 @@ public class LoginActivity extends AppCompatActivity {
             Intent myIntent = new Intent(this, ValidationActivity.class);
             startActivity(myIntent);
 }
+    public void showIPDialog(){
+        final EditText txtIP = new EditText(this);
+
+
+        new AlertDialog.Builder(this)
+                .setTitle("Digite o IP do servidor:")
+                .setView(txtIP)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        Constants.BASE_URL = "http://" + txtIP.getText().toString() + ":9000";
+                    }
+                })/*
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                })*/
+                .show();
+    }
 }

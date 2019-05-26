@@ -17,9 +17,6 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
-/**
- * Created by Renilson Albuquerque on 21/11/2018.
- */
 
 public interface BackendAPI {
 
