@@ -7,12 +7,13 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/textNumeroPedido"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Pedido 65" />
+        android:text="Disgraçaaaaa"/>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_lista_produtos"
+        android:id="@+id/rv_lista_produtos_pedido"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

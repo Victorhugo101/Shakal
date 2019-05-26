@@ -11,6 +11,9 @@ import android.widget.TextView
 import easypark.com.mobiletruck.R
 import easypark.com.mobiletruck.fragments.DetalhePedidoFragment
 import easypark.com.mobiletruck.model.PedidoOverviewDTO
+import android.support.v7.app.AppCompatActivity
+
+
 
 
 class PedidoAdapter(private val pedidos: MutableList<PedidoOverviewDTO>, private val context: Context)
@@ -24,36 +27,49 @@ class PedidoAdapter(private val pedidos: MutableList<PedidoOverviewDTO>, private
         return ViewHolder(view)
     }
     override fun onBindViewHolder(viewHolder: ViewHolder, p1: Int) {
-        val pedido = pedidos[p1]
+        val pedido: PedidoOverviewDTO = pedidos.get(p1)
 
         viewHolder.codigo.text = pedido.id.toString()
         viewHolder.numeroMesa.text = pedido.mesa.toString()
         viewHolder.nomeCliente.text = pedido.nomeCliente
         viewHolder.status.text = pedido.status.toString()
+
+
+        viewHolder.itemView.setOnClickListener { v ->
+            chamaProximoFragmento(p1,DetalhePedidoFragment.newInstance())
+        }
+
+
+
+        //val manager = (context as AppCompatActivity).supportFragmentManager
     }
 
     fun chamaProximoFragmento(position: Int, fragmento: Fragment) {
 
         val bundle = Bundle()
-        bundle.putSerializable("produto", this.pedidos.get(position))
-        val fragment = DetalhePedidoFragment.newInstance()
-        fragment.setArguments(bundle)
-        val ft = fragmento.activity!!.supportFragmentManager.beginTransaction()
-        ft.replace(R.id.main_container, fragment)
-        //ft.addToBackStack("ListComprarProduto")
-        ft.commit()
+        //bundle.putSerializable("produto", pedido)
+
+        //val fragment = DetalhePedidoFragment.newInstance()
+        //fragment.setArguments(bundle)
+
+        val fragmentTransaction = (context as AppCompatActivity)!!.supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.main_container, fragmento)
+        fragmentTransaction.addToBackStack("ListaPedido")
+        fragmentTransaction.commit()
     }
     override fun getItemCount(): Int {
         return pedidos.size
     }
 
-    inner class ViewHolder internal constructor(view: View) : RecyclerView.ViewHolder(view),View.OnClickListener{
+    inner class ViewHolder internal constructor(view: View) : RecyclerView.ViewHolder(view),View.OnClickListener {
+
 
         override fun onClick(p0: View?) {
             if (recycleViewClickListener != null) {
                 recycleViewClickListener?.onClickListener(p0 , adapterPosition)
             }
         }
+
 
 
         internal var nomeCliente: TextView
@@ -72,7 +88,8 @@ class PedidoAdapter(private val pedidos: MutableList<PedidoOverviewDTO>, private
 
     }
 
-    public fun setPedidoRecycleViewOnClick(r: RecycleViewClickListener) {
+
+    fun setPedidoRecycleViewOnClick(r: RecycleViewClickListener) {
         this.recycleViewClickListener = r
     }
 

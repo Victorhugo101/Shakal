@@ -19,7 +19,8 @@ import easypark.com.mobiletruck.model.PedidoStatusEnum
 //import kotlinx.android.synthetic.main.fragment_list_pedidos.*
 
 
-class ListPedidosFragment : Fragment(), RecycleViewClickListener {
+class ListPedidosFragment : Fragment(), RecycleViewClickListener
+{
 
 
 
@@ -35,6 +36,7 @@ class ListPedidosFragment : Fragment(), RecycleViewClickListener {
 
         return view
     }
+
     override fun onClickListener(view: View?, position: Int) {
         val adapter = recyclerView.getAdapter() as PedidoAdapter
         adapter.chamaProximoFragmento(position, this)
