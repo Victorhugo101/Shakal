@@ -6,6 +6,7 @@ import com.example.easypark.easyparkfinal.beans.LoginDTO;
 import com.example.easypark.easyparkfinal.beans.PedidoDTO;
 import com.example.easypark.easyparkfinal.beans.PedidoListView;
 import com.example.easypark.easyparkfinal.beans.Produto;
+import com.example.easypark.easyparkfinal.beans.TokenDTO;
 import com.example.easypark.easyparkfinal.beans.Truck;
 
 import java.util.List;
@@ -42,8 +43,8 @@ public interface BackendAPI {
     Call<Boolean> cadastrarUsuario(@Body Cliente cliente);
 
     @Headers("Content-Type: application/json")
-    @POST("/usuario/logar")
-    Call<Cliente> logarUsuario(@Body LoginDTO login);
+    @POST("/login")
+    Call<TokenDTO> logarUsuario(@Body LoginDTO login);
 
     @Headers("Content-Type: application/json")
     @POST("/pedido/save")

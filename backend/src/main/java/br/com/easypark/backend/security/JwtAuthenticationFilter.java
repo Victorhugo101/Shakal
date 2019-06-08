@@ -38,7 +38,7 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
         LoginDTO loginDTO = null;
         try{
             loginDTO = new ObjectMapper().readValue(request.getInputStream(), LoginDTO.class);
-            System.out.println(loginDTO.getEmail());
+            
             return getAuthenticationManager().authenticate(
                     new UsernamePasswordAuthenticationToken(
                             loginDTO.getEmail(),

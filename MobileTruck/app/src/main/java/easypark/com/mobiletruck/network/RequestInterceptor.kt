@@ -1,5 +1,6 @@
 package easypark.com.mobiletruck.network
 
+import android.content.Context
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -14,6 +15,7 @@ class RequestInterceptor : Interceptor {
         request = request?.newBuilder()
                 ?.addHeader("Content-Type", "application/json")
                 ?.addHeader("Accept", "application/json")
+                ?.addHeader("Authorization","token")
                 ?.build()
         return chain.proceed(request)
     }

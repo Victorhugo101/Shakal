@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.easypark.easyparkfinal.R;
 import com.example.easypark.easyparkfinal.beans.Cliente;
 import com.example.easypark.easyparkfinal.beans.LoginDTO;
+import com.example.easypark.easyparkfinal.beans.TokenDTO;
 import com.example.easypark.easyparkfinal.network.ClienteService;
 import com.example.easypark.easyparkfinal.network.UsuarioService;
 import com.example.easypark.easyparkfinal.utils.Constants;
@@ -65,17 +66,19 @@ public class LoginActivity extends AppCompatActivity {
     private void validate(){
         LoginDTO login = new LoginDTO(txtLogin.getText().toString(), txtPassword.getText().toString());
         Call call = UsuarioService.logarUsuario(login);
-        call.enqueue(new Callback<Cliente>() {
+        call.enqueue(new Callback<TokenDTO>() {
 
             @Override
-            public void onResponse(Call<Cliente> call, Response<Cliente> response) {
-                if(response.body().getId() > 0){
+            public void onResponse(Call<TokenDTO> call, Response<TokenDTO> response) {
+                if(response.code() == 200){
 
                     SharedPreferences sp = getSharedPreferences("usuario", MODE_PRIVATE);
                     SharedPreferences.Editor ed = sp.edit();
-                    ed.putInt("id", response.body().getId().intValue());
-                    ed.putString("nome", response.body().getNome());
-                    ed.putString("email", response.body().getEmail());
+                    //ed.putInt("id", response.body().getId().intValue());
+                    //ed.putString("nome", response.body().getNome());
+                    //ed.putString("email", response.body().getEmail());
+                    ed.putString("token", response.body().getToken());
+
                     ed.commit();
                     goToQrCode();
                 }
@@ -84,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Cliente> call, Throwable t) {
+            public void onFailure(Call<TokenDTO> call, Throwable t) {
                 exibirMensagem("Erro ao conectar com o servidor");
             }
 
