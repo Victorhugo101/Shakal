@@ -29,7 +29,7 @@ public class TokenAuthenticationService {
     static final String HEADER_STRING = "Authorization";
 
 
-    static void addAuthentication(HttpServletResponse response, Long id, String username, Collection<? extends GrantedAuthority> autorizations) {
+    static String addAuthentication(Long id, String username, Collection<? extends GrantedAuthority> autorizations) {
 
         ArrayList<String> rolesAsString = new ArrayList<>();
         
@@ -46,8 +46,9 @@ public class TokenAuthenticationService {
                 .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
                 .compact();
 
-        response.setStatus(HttpServletResponse.SC_OK);
-        response.addHeader(HEADER_STRING, TOKEN_PREFIX + " " + JWT);
+        
+       
+        return  TOKEN_PREFIX + " " + JWT;
     }
 
     static Authentication getAuthentication(HttpServletRequest request) throws SignatureException, BadCredentialsException {

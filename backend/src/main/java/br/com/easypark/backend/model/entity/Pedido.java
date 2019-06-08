@@ -30,7 +30,11 @@ public class Pedido {
 	 
 	 @ManyToOne(fetch = FetchType.LAZY)
 	 @JoinColumn(name = "id_cliente")
-	 private Cliente cliente; 
+	 private Cliente cliente;
+	 
+	 @ManyToOne(fetch = FetchType.LAZY)
+	 @JoinColumn(name = "id_truck")
+	 private Truck truck;
 	 
 	 
 	 @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -92,6 +96,16 @@ public class Pedido {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+
+
+	public Truck getTruck() {
+		return truck;
+	}
+
+
+	public void setTruck(Truck truck) {
+		this.truck = truck;
 	}
 
 

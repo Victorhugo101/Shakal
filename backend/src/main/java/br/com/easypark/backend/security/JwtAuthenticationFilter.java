@@ -3,9 +3,12 @@ package br.com.easypark.backend.security;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
+import br.com.easypark.backend.exception.ExceptionReponseDetail;
 import br.com.easypark.backend.handler.SecurityHandlerExceptionBuilder;
 import br.com.easypark.backend.model.dto.LoginDTO;
+import br.com.easypark.backend.model.dto.TokenDTO;
 import br.com.easypark.backend.utils.Messages;
 
 import org.springframework.security.authentication.AuthenticationManager;
@@ -35,6 +38,7 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
         LoginDTO loginDTO = null;
         try{
             loginDTO = new ObjectMapper().readValue(request.getInputStream(), LoginDTO.class);
+            System.out.println(loginDTO.getEmail());
             return getAuthenticationManager().authenticate(
                     new UsernamePasswordAuthenticationToken(
                             loginDTO.getEmail(),
@@ -55,8 +59,16 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
             HttpServletRequest req,
             HttpServletResponse res, FilterChain chain,
             Authentication auth) throws IOException, ServletException {
-        TokenAuthenticationService.addAuthentication(res,Long.valueOf(1),auth.getName(),auth.getAuthorities());
-
+    	
+    	String json = new Gson().toJson( new TokenDTO(
+    		TokenAuthenticationService.addAuthentication(Long.valueOf(1),auth.getName(),auth.getAuthorities())
+    	));
+    	res.setContentType("application/json");
+        res.setCharacterEncoding("UTF-8");
+        res.getWriter().println(json);
+        res.setStatus(HttpServletResponse.SC_OK);
+    	
+        
     }
 
     @Override

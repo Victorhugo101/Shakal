@@ -24,5 +24,6 @@ public class SecurityHandlerExceptionBuilder {
         response.setStatus(status);
         return response;
     }
+	
 
 }

@@ -38,9 +38,15 @@ public class PedidoController {
 		 
 	 }
 	 
-	 @GetMapping("/listar/{id}")
-	 public ResponseEntity<List<PedidoSaidaDTO>> listMy(@PathVariable long id) {
-		return new ResponseEntity<List<PedidoSaidaDTO>>(this.pedidoService.listarMeusPedidos(id),HttpStatus.OK);
+	 @GetMapping("/listar/cliente/{id}")
+	 public ResponseEntity<List<PedidoSaidaDTO>> listCliente(@PathVariable long id) {
+		return new ResponseEntity<List<PedidoSaidaDTO>>(this.pedidoService.listarPedidosCliente(id),HttpStatus.OK);
+		 
+	 }
+	 
+	 @GetMapping("/listar/truck/{id}")
+	 public ResponseEntity<List<PedidoSaidaDTO>> listTruck(@PathVariable long id) {
+		return new ResponseEntity<List<PedidoSaidaDTO>>(this.pedidoService.listarPedidosTruck(id),HttpStatus.OK);
 		 
 	 }
 	 
