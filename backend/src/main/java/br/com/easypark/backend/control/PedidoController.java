@@ -43,6 +43,11 @@ public class PedidoController {
 		return new ResponseEntity<List<PedidoSaidaDTO>>(this.pedidoService.listarMeusPedidos(id),HttpStatus.OK);
 		 
 	 }
+	 
+	 @PostMapping("/finalizar/{id}")
+	 public ResponseEntity<Boolean> finalizarPedido(@PathVariable long id){
+		 return new ResponseEntity<Boolean>(this.pedidoService.finalizarPedido(id,1),HttpStatus.OK);
+	 }
 
 
 }

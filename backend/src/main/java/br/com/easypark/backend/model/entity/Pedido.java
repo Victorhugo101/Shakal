@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import br.com.easypark.backend.model.enums.StatusPedidoEnum;
+
 @Entity
 @Table(name = "tb_pedido")
 public class Pedido {
@@ -24,7 +26,7 @@ public class Pedido {
 	 private Long id;
 	
 
-	 private int status;
+	 private StatusPedidoEnum status;
 	 
 	 @ManyToOne(fetch = FetchType.LAZY)
 	 @JoinColumn(name = "id_cliente")
@@ -45,21 +47,19 @@ public class Pedido {
 		}
 	 
 
-	public Pedido(int status, Cliente cliente, List<Produto> produtos, Mesa mesa) {
+	public Pedido(StatusPedidoEnum status, Cliente cliente, List<Produto> produtos, Mesa mesa) {
 		super();
-		this.status = status;
+		this.status = StatusPedidoEnum.PREPARANDO;
 		this.cliente = cliente;
 		this.produtos = produtos;
 		this.mesa = mesa;
-		this.status = 1;
 	}
-	public Pedido(int status, Cliente cliente, Mesa mesa) {
+	public Pedido(Cliente cliente, Mesa mesa) {
 		super();
 		this.status = status;
 		this.cliente = cliente;
 		this.produtos = new ArrayList<>();
 		this.mesa = mesa;
-		this.status = 1;
 	}
 
 	public Long getId() {
@@ -72,12 +72,15 @@ public class Pedido {
 	}
 
 
-	public int getStatus() {
+	
+
+
+	public StatusPedidoEnum getStatus() {
 		return status;
 	}
 
 
-	public void setStatus(int status) {
+	public void setStatus(StatusPedidoEnum status) {
 		this.status = status;
 	}
 

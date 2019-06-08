@@ -1,0 +1,15 @@
+Funcionalidades:
+Cliente:
+-Cadastro;
+-Login;
+-Leitura de Qr code
+-Visualizar Lista de Truck;
+-Visualizar cardápio do Truck selecionado;
+-Realizar pedido;
+-Pedido deve ser enviado ao app do truck;
+-Cliente deve ter uma tela de pedidos;
+
+Truck:
+-Receber pedido de cliente;
+-Visualizar pedido;
+-Enviar status do pedido conforme for alterado(preparando, pronto);

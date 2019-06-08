@@ -23,4 +23,5 @@ public class RestHandlerexceptionBuilder {
 
         return new ResponseEntity<>(resourceNotFoundDetail, HttpStatus.NOT_FOUND);
     }
+   
 }

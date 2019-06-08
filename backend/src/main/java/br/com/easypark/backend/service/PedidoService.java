@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
 
 import br.com.easypark.backend.data.ClienteDAO;
@@ -11,6 +12,7 @@ import br.com.easypark.backend.data.MesaDAO;
 import br.com.easypark.backend.data.PedidoDAO;
 import br.com.easypark.backend.data.PedidoProdutoDAO;
 import br.com.easypark.backend.data.ProdutoDAO;
+import br.com.easypark.backend.exception.ResourceNotFoundException;
 import br.com.easypark.backend.model.dto.PedidoEntradaDTO;
 import br.com.easypark.backend.model.dto.PedidoSaidaDTO;
 import br.com.easypark.backend.model.dto.ProdutoQuantidadeDTO;
@@ -19,6 +21,8 @@ import br.com.easypark.backend.model.entity.Mesa;
 import br.com.easypark.backend.model.entity.Pedido;
 import br.com.easypark.backend.model.entity.PedidoProduto;
 import br.com.easypark.backend.model.entity.Produto;
+import br.com.easypark.backend.model.enums.StatusPedidoEnum;
+import br.com.easypark.backend.utils.Messages;
 
 @Service
 public class PedidoService {
@@ -43,8 +47,8 @@ public class PedidoService {
 		Pedido p;
 		Cliente cliente = clienteDAO.findById(pedidoEntradaDTO.getCliente()).get();
 		Mesa m = mesaDAO.findById(pedidoEntradaDTO.getMesa()).get();
-		p = new Pedido(0,cliente,m);
-		p.setStatus(1);
+		p = new Pedido(cliente,m);
+		p.setStatus(StatusPedidoEnum.PREPARANDO);
 		pedidoDAO.save(p);
 		
 		//List<PedidoProduto> produtos = new ArrayList<>();
@@ -67,5 +71,12 @@ public class PedidoService {
 		}
 		return pedidos;
 		
+	}
+	public Boolean finalizarPedido(long pedidoId, long truckId) {
+		Pedido pedido = this.pedidoDAO.findById(pedidoId)
+				.orElseThrow(() -> new ResourceNotFoundException("Pedido Não encontrado"));
+		pedido.setStatus(StatusPedidoEnum.FINALIZADO);
+		this.pedidoDAO.save(pedido);
+		return true;
 	}
 }
