@@ -5,12 +5,14 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 
 import easypark.com.mobiletruck.R
@@ -26,7 +28,7 @@ class DetalhePedidoFragment : Fragment() {
     private val produtos = mutableListOf<ProdutoOverviewDTO>()
     private lateinit var listView: RecyclerView
     private lateinit var textView: TextView
-
+    private lateinit var btnFinalizar: Button
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -34,7 +36,9 @@ class DetalhePedidoFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_detalhe_pedido, container, false)
         listView = view.findViewById( R.id.rv_lista_produtos_pedido)
         textView = view.findViewById( R.id.textNumeroPedido)
-        this.carregarProdutos()
+        btnFinalizar = view.findViewById<Button>(R.id.btnFinalizarPedido)
+        btnFinalizar.setOnClickListener{finalziarPedido()}
+        this.carregarProdutos( )
         return view
     }
 
@@ -59,6 +63,13 @@ class DetalhePedidoFragment : Fragment() {
         listView.itemAnimator = DefaultItemAnimator()
         listView.adapter = mAdapter
 
+    }
+
+    private fun finalziarPedido(){
+        val fragmentTransaction = (context as AppCompatActivity)!!.supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.main_container, ListPedidosFragment.newInstance())
+        fragmentTransaction.addToBackStack("DetalhesPedido")
+        fragmentTransaction.commit()
     }
 
     companion object {

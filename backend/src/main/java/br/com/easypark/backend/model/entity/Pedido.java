@@ -33,7 +33,7 @@ public class Pedido {
 	 
 	 @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	 @JoinTable(name = "mtm_pedido_produto", joinColumns = @JoinColumn(name = "id_pedido"), inverseJoinColumns = @JoinColumn(name = "id_produto"))
-	 private List<Produto> produtos = new ArrayList<>();
+	 private List<Produto> produtos;
 	 
 	 
 	 @ManyToOne(fetch = FetchType.LAZY)

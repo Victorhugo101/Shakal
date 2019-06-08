@@ -7,54 +7,42 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "tb_truck")
-public class Truck {
+public class Truck extends User{
 
-	 @Id
-	 @GeneratedValue
-	 private Long id;
-	
+
 	 @NotBlank
 	 private String cnpj;
 	 
 	 @NotBlank
 	 private String nomeFantasia;
 	 
-	 @NotBlank
-	 private String email;
-	 
-	 @NotBlank
-	 private String senha;
-	 
 	 private double latitude;
 	 
 	 private double longitude;
 	 
-	 @OneToMany(mappedBy = "truck", cascade = CascadeType.ALL)
+	 @OneToMany(mappedBy = "truck")
 	 private List<Produto> produtos = new ArrayList<>();
+	 
+	 
 	 public Truck( ) {
 			
 		}
 	public Truck( String cnpj,String nomeFantasia, String email,  String senha) {
 		this.cnpj = cnpj;
 		this.nomeFantasia = nomeFantasia;
-		this.email = email;
-		this.senha = senha;
+		this.setEmail(email);
+		this.setPassword(senha);
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
+	
 	public String getCnpj() {
 		return cnpj;
 	}
@@ -69,22 +57,6 @@ public class Truck {
 
 	public void setNomeFantasia(String nomeFantasia) {
 		this.nomeFantasia = nomeFantasia;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
 	}
 
 	public List<Produto> getProdutos() {

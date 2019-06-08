@@ -29,9 +29,11 @@ public class ClienteController {
 		return new ResponseEntity<Boolean>(usuarioService.cadastrarCliente(cliente), HttpStatus.OK);
 	}
 	
+	/*
 	@PostMapping("/logar")
 	public ResponseEntity<ClienteCadastroDTO> logar(@RequestBody LoginDTO login) {
 		return new ResponseEntity<ClienteCadastroDTO>(usuarioService.logar(login), HttpStatus.OK);
 	}
+	*/
 
 }
