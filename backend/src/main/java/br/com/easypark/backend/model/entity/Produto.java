@@ -21,7 +21,7 @@ public class Produto {
 	 private String nome;
 	 
 	 @NotBlank
-	 private String valor;
+	 private double valor;
 	 
 	 @ManyToOne(fetch = FetchType.LAZY)
 	 @JoinColumn(name = "id_categoria")
@@ -35,7 +35,7 @@ public class Produto {
 			
 		}
 	 
-	public Produto( String nome,String valor, Categoria categoria) {
+	public Produto( String nome,double valor, Categoria categoria) {
 		this.nome = nome;
 		this.valor = valor;
 		this.categoira = categoria;
@@ -57,11 +57,12 @@ public class Produto {
 		this.nome = nome;
 	}
 
-	public String getValor() {
+	
+	public double getValor() {
 		return valor;
 	}
 
-	public void setValor(String valor) {
+	public void setValor(double valor) {
 		this.valor = valor;
 	}
 

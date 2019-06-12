@@ -41,6 +41,15 @@ public class Truck extends User{
 		this.setEmail(email);
 		this.setPassword(senha);
 	}
+	public Truck(String cnpj,String nomeFantasia, String email,  String senha,
+			double latitude, double longitude) {
+		this.cnpj = cnpj;
+		this.nomeFantasia = nomeFantasia;
+		this.setEmail(email);
+		this.setPassword(senha);
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
 
 	
 	public String getCnpj() {

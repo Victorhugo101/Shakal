@@ -25,7 +25,7 @@ public class ProdutoService {
 		}
 		List<ProdutoDTO> resultado = new ArrayList<>();
 		for(Produto p: pesquisa) {
-			resultado.add(new ProdutoDTO(p.getId(),p.getNome(),p.getValor()));
+			resultado.add(new ProdutoDTO(p.getId(),p.getNome(),String.valueOf(p.getValor())));
 		}
 		return resultado;
 	}
@@ -33,7 +33,7 @@ public class ProdutoService {
 		List<ProdutoDTO> pesquisa = new ArrayList<>();
 		for(Produto r: produtoDAO.findAll()) {
 			if(r.getTruck().getId() == categoriaID)
-			pesquisa.add(new ProdutoDTO(r.getId(),r.getNome(),r.getValor()));
+			pesquisa.add(new ProdutoDTO(r.getId(),r.getNome(),String.valueOf(r.getValor())));
 		}
 		return pesquisa;
 	}

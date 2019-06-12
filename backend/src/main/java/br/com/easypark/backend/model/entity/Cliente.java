@@ -29,7 +29,7 @@ public class Cliente extends User {
 	}
 	
 
-	public Cliente(String nomeCompleto, String email, String senha) {
+	public Cliente(String email,String nomeCompleto, String senha) {
 		super.setUsername(nomeCompleto);
 		super.setEmail(email);
 		super.setPassword(senha);
