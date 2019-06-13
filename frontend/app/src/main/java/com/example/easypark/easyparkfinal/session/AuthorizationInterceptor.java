@@ -11,15 +11,13 @@ import okhttp3.Authenticator;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
-import okhttp3.Route;
 
 public class AuthorizationInterceptor implements Interceptor {
-    private IBackendAPI apiService;
+
     private Session session;
 
 
     public AuthorizationInterceptor() {
-        //this.apiService = apiService;
         this.session = SessionManager.getInstance().getSession();
     }
 

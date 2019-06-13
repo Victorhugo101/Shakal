@@ -37,7 +37,7 @@ public class ListActivity extends AppCompatActivity {
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("trucks", new TruckListSerializable(foodTrucks));
 
-                    
+
 
                     FoodTruckListFragment fragment = new FoodTruckListFragment();
                     fragment.setArguments(bundle);
