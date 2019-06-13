@@ -19,7 +19,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 
-public interface BackendAPI {
+public interface IBackendAPI {
 
 
     @Headers("Content-Type: application/json")

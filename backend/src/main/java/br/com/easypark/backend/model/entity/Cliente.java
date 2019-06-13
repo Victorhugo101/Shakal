@@ -33,6 +33,8 @@ public class Cliente extends User {
 		super.setUsername(nomeCompleto);
 		super.setEmail(email);
 		super.setPassword(senha);
+		super.setEnabled(true);
+	
 	}
 
 	public List<Pedido> getPedidos() {

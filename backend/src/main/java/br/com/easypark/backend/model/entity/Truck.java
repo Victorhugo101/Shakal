@@ -35,16 +35,18 @@ public class Truck extends User{
 	 public Truck( ) {
 			
 		}
-	public Truck( String cnpj,String nomeFantasia, String email,  String senha) {
+	public Truck( String cnpj,String nomeFantasia, String uername,String email,  String senha) {
 		this.cnpj = cnpj;
 		this.nomeFantasia = nomeFantasia;
 		this.setEmail(email);
 		this.setPassword(senha);
 	}
-	public Truck(String cnpj,String nomeFantasia, String email,  String senha,
+	public Truck(String cnpj,String nomeFantasia,String username, String email,  String senha,
 			double latitude, double longitude) {
 		this.cnpj = cnpj;
 		this.nomeFantasia = nomeFantasia;
+		super.setEnabled(true);
+		this.setUsername(username);
 		this.setEmail(email);
 		this.setPassword(senha);
 		this.latitude = latitude;

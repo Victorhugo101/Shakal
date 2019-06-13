@@ -10,11 +10,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import br.com.easypark.backend.data.ClienteDAO;
+import br.com.easypark.backend.data.MesaDAO;
 import br.com.easypark.backend.data.ProdutoDAO;
 import br.com.easypark.backend.data.TruckDAO;
 import br.com.easypark.backend.data.UserDAO;
 import br.com.easypark.backend.model.entity.Categoria;
 import br.com.easypark.backend.model.entity.Cliente;
+import br.com.easypark.backend.model.entity.Mesa;
 import br.com.easypark.backend.model.entity.Produto;
 import br.com.easypark.backend.model.entity.Truck;
 import br.com.easypark.backend.model.entity.User;
@@ -26,15 +28,17 @@ public class DataInitializer implements ApplicationRunner {
     private ClienteDAO clienteRepository;
     private TruckDAO truckDao;
     private ProdutoDAO produtoRepository;
+    private MesaDAO mesaRepository;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     public DataInitializer(ClienteDAO userRepository, BCryptPasswordEncoder bCryptPasswordEncoder,
-    		ProdutoDAO produtoRepository, TruckDAO truckDao) {
+    		ProdutoDAO produtoRepository, TruckDAO truckDao, MesaDAO mesaRepository) {
         this.clienteRepository = userRepository;
         this.truckDao = truckDao;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.produtoRepository = produtoRepository;
+        this.mesaRepository = mesaRepository;
     }
 
     @Override
@@ -47,15 +51,25 @@ public class DataInitializer implements ApplicationRunner {
         String passwordTruck = bCryptPasswordEncoder.encode("123456");
        
         if(!this.produtoRepository.findAll().iterator().hasNext()) {
-        	List<Produto> produtos = new ArrayList<Produto>();
-        	produtos.add(new Produto("Hamburger de Siri",10D,new Categoria()));
-        	produtos.add(new Produto("Suco de Laranja",10D,new Categoria()));
-        	produtos.add(new Produto("Batata frita",10D,new Categoria()));
         	
-        	Truck truck = new Truck("10987483672452","Siri Cascudo","truck@gmail.com",
-        			passwordTruck,1.0989478D,0.874772637D);
+        	List<Produto> produtos = new ArrayList<Produto>();
+        	produtos.add(new Produto("Hamburger de Siri",10D));
+        	produtos.add(new Produto("Suco de Laranja",10D));
+        	produtos.add(new Produto("Batata frita",10D));
+        	Truck truck = new Truck("10987483672452","Siri Cascudo","siricascudo","truck@gmail.com",
+        			passwordTruck,-7.998534,-34.924024);
+        	
+        	truck.setProdutos(produtos);
+        	
+        	
         	this.truckDao.save(truck);
         	
+        }
+        if(!this.mesaRepository.findAll().iterator().hasNext()) {
+        	Mesa mesa = new Mesa("oj93hr972gdh1928h",4);
+        	mesa.setLatitude(-7.998533);
+        	mesa.setLongitude(-34.924023);
+        	this.mesaRepository.save(mesa);
         }
         System.out.println("Inserted Empty data");
         

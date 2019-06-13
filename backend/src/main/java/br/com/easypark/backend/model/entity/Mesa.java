@@ -33,13 +33,12 @@ public class Mesa {
 	 
 	 public Mesa() {
 			
-		}
+	 }
 	 
-	public Mesa(String qrCode, int capacidade, List<Pedido> pedidos) {
+	 public Mesa(String qrCode, int capacidade) {
 		this.qrCode = qrCode;
 		this.capacidade = capacidade;
-		this.pedidos = pedidos;
-	}
+	 }
 
 	public Long getId() {
 		return id;

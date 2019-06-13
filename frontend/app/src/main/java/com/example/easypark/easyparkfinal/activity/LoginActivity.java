@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-            this.showIPDialog();
+            //this.showIPDialog();
 
     }
 
@@ -100,13 +100,13 @@ public class LoginActivity extends AppCompatActivity {
         Intent myIntent = new Intent(this, CadastroActivity.class);
         startActivity(myIntent);
     }
-      public void exibirMensagem(String mensagem){
+    public void exibirMensagem(String mensagem){
         Toast.makeText(this,mensagem,Toast.LENGTH_SHORT).show();
-        }
-        private void goToQrCode(){
-            Intent myIntent = new Intent(this, ValidationActivity.class);
-            startActivity(myIntent);
-}
+    }
+    private void goToQrCode(){
+        Intent myIntent = new Intent(this, ValidationActivity.class);
+        startActivity(myIntent);
+    }
     public void showIPDialog(){
         final EditText txtIP = new EditText(this);
 

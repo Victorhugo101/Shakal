@@ -19,7 +19,7 @@ public class ClienteService {
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        BackendAPI service = retrofit.create(BackendAPI.class);
+        IBackendAPI service = retrofit.create(IBackendAPI.class);
         return service.cadastrarUsuario(cliente);
     }
 

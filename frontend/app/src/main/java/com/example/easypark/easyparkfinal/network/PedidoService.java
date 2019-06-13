@@ -1,6 +1,5 @@
 package com.example.easypark.easyparkfinal.network;
 
-import com.example.easypark.easyparkfinal.beans.Pedido;
 import com.example.easypark.easyparkfinal.beans.PedidoDTO;
 import com.example.easypark.easyparkfinal.beans.PedidoListView;
 import com.example.easypark.easyparkfinal.utils.Constants;
@@ -25,7 +24,7 @@ public class PedidoService {
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        BackendAPI service = retrofit.create(BackendAPI.class);
+        IBackendAPI service = retrofit.create(IBackendAPI.class);
         return service.cadastrarPedido(pedidoDTO);
     }
 
@@ -34,7 +33,7 @@ public class PedidoService {
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        BackendAPI service = retrofit.create(BackendAPI.class);
+        IBackendAPI service = retrofit.create(IBackendAPI.class);
         return service.listarMeusPedidos(id);
     }
 

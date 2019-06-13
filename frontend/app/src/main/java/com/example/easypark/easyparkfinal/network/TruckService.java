@@ -1,7 +1,7 @@
 package com.example.easypark.easyparkfinal.network;
 
-import com.example.easypark.easyparkfinal.beans.Produto;
 import com.example.easypark.easyparkfinal.beans.Truck;
+import com.example.easypark.easyparkfinal.session.RetrofitBuilder;
 import com.example.easypark.easyparkfinal.utils.Constants;
 
 import java.util.ArrayList;
@@ -20,12 +20,14 @@ public class TruckService {
 
 
     public static Call<List<Truck>> listarTrcksPerto(){
+        /*
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        BackendAPI service = retrofit.create(BackendAPI.class);
-        return service.listarTrucksPorMesa(1L);
+        IBackendAPI service = retrofit.create(IBackendAPI.class);
+        */
+        return RetrofitBuilder.getApiService().listarTrucksPorMesa(1L);
     }
 
     public static List<Truck> converterParaTruck(Response<List<Truck>> lista){

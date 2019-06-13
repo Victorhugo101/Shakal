@@ -1,6 +1,7 @@
 package com.example.easypark.easyparkfinal.network;
 
 import com.example.easypark.easyparkfinal.beans.Produto;
+import com.example.easypark.easyparkfinal.session.RetrofitBuilder;
 import com.example.easypark.easyparkfinal.utils.Constants;
 
 import java.util.ArrayList;
@@ -19,12 +20,14 @@ public class ProdutoService {
 
 
     public static Call<List<Produto>> listarProdutosPorTruck(long truckID){
+        /*
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        BackendAPI service = retrofit.create(BackendAPI.class);
-        return service.listarProdutosPorTruck(truckID);
+        IBackendAPI service = retrofit.create(IBackendAPI.class);
+        */
+        return RetrofitBuilder.getApiService().listarProdutosPorTruck(truckID);
     }
 
     public static List<Produto> converterParaProduto(Response<List<Produto>> lista){

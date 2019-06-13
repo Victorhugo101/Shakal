@@ -1,6 +1,5 @@
 package com.example.easypark.easyparkfinal.network;
 
-import com.example.easypark.easyparkfinal.beans.Cliente;
 import com.example.easypark.easyparkfinal.beans.LoginDTO;
 import com.example.easypark.easyparkfinal.beans.TokenDTO;
 import com.example.easypark.easyparkfinal.utils.Constants;
@@ -15,7 +14,7 @@ public class UsuarioService {
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        BackendAPI service = retrofit.create(BackendAPI.class);
+        IBackendAPI service = retrofit.create(IBackendAPI.class);
         return service.logarUsuario(login);
     }
 }

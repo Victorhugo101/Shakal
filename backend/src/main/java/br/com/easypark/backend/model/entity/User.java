@@ -34,7 +34,7 @@ public class User implements UserDetails {
     private String password;
 
 
-    @Column(name = "use_cl_activated", nullable = false)
+    @Column( nullable = false)
     private Boolean activated;
     
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER )
@@ -107,6 +107,9 @@ public class User implements UserDetails {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public void setEnabled(boolean enabled) {
+		this.activated = enabled;
 	}
 
 	

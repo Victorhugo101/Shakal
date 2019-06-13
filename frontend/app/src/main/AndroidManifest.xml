@@ -19,7 +19,8 @@ package="com.example.easypark.easyparkfinal">
     <activity android:name=".activity.ValidationActivity" />
     <activity android:name=".activity.ListActivity"></activity>
     <activity android:name="com.example.easypark.easyparkfinal.activity.SplashActivity"
-        android:theme="@style/AppTheme.SplashScreen">
+        android:theme="@style/AppTheme.SplashScreen"
+        android:launchMode="singleTop">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
