@@ -9,14 +9,44 @@ import android.view.Menu
 import android.view.MenuItem
 import easypark.com.mobiletruck.R
 import easypark.com.mobiletruck.fragments.ListPedidosFragment
+import easypark.com.mobiletruck.model.PedidoOverviewDTO
+import easypark.com.mobiletruck.model.Token
+import easypark.com.mobiletruck.network.PedidoService
+import easypark.com.mobiletruck.network.UsuarioService
+import easypark.com.mobiletruck.parcelables.ListPedidosOverviewDTO
 import easypark.com.mobiletruck.session.SessionManager
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class TruckMainApp : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        replaceFragment(ListPedidosFragment.newInstance())
+        if(savedInstanceState == null) {
+            val call = PedidoService.newInstance().listarPedidos()
+            call.enqueue(object : Callback<List<PedidoOverviewDTO>> {
+                override fun onResponse(call: Call<List<PedidoOverviewDTO>?>?,
+                                        response: Response<List<PedidoOverviewDTO>?>?) {
+                    var fragment = ListPedidosFragment.newInstance()
+
+                    val args = Bundle()
+                    val lista = ListPedidosOverviewDTO(response!!.body().orEmpty())
+                    args.putParcelable("pedidos",lista)
+
+                    fragment.arguments = args
+                    replaceFragment(fragment)
+
+                }
+
+                override fun onFailure(call: Call<List<PedidoOverviewDTO>?>?,
+                                       t: Throwable?) {
+                }
+
+
+            })
+        }
     }
 
     private fun replaceFragment(fragment: Fragment) {

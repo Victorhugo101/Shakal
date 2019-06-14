@@ -69,7 +69,7 @@ public class PedidoService {
 		for (Pedido p : this.pedidoDAO.findAll()) {
 			if (p.getCliente().getId() == id) {
 				pedidos.add(new PedidoSaidaDTO(p.getId(),
-						(p.getProdutos().size() > 0) ? p.getProdutos().get(0).getTruck().getNomeFantasia()
+						(p.getProdutos().size() > 0) ? p.getProdutos().get(0).getProduto().getTruck().getNomeFantasia()
 								: "String teste",
 						"Preparando"));
 			}
@@ -84,7 +84,7 @@ public class PedidoService {
 		for (Pedido p : this.pedidoDAO.findAll()) {
 			if (p.getTruck().getId() == id) {
 				pedidos.add(new PedidoSaidaDTO(p.getId(),
-						(p.getProdutos().size() > 0) ? p.getProdutos().get(0).getTruck().getNomeFantasia()
+						(p.getProdutos().size() > 0) ? p.getProdutos().get(0).getProduto().getTruck().getNomeFantasia()
 								: "String teste",
 						"Preparando"));
 			}

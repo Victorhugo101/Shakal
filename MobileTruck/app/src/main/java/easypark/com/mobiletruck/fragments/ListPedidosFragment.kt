@@ -16,6 +16,8 @@ import easypark.com.mobiletruck.adapter.ProdutoAdapter
 import easypark.com.mobiletruck.adapter.RecycleViewClickListener
 import easypark.com.mobiletruck.model.PedidoOverviewDTO
 import easypark.com.mobiletruck.model.PedidoStatusEnum
+import easypark.com.mobiletruck.parcelables.ListPedidosOverviewDTO
+
 //import kotlinx.android.synthetic.main.fragment_list_pedidos.*
 
 
@@ -25,7 +27,7 @@ class ListPedidosFragment : Fragment(), RecycleViewClickListener
 
 
     private var mAdapter: PedidoAdapter? = null
-    private val pedidos = mutableListOf<PedidoOverviewDTO>()
+    private var pedidos = mutableListOf<PedidoOverviewDTO>()
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -43,10 +45,12 @@ class ListPedidosFragment : Fragment(), RecycleViewClickListener
     }
 
     private fun carregarPedidos(){
-
+        /*
         pedidos.add(0,PedidoOverviewDTO(1,"Josenilsom",3,PedidoStatusEnum.PRONTO))
         pedidos.add(1,PedidoOverviewDTO(2,"Robervalsom",3,PedidoStatusEnum.PREPARANDO))
         pedidos.add(2,PedidoOverviewDTO(3,"Mariucleuçio",3,PedidoStatusEnum.PREPARANDO))
+        */
+        this.pedidos =  arguments!!.getParcelable<ListPedidosOverviewDTO>("pedidos").pedidosOverviewDTO.toMutableList()
         mAdapter = PedidoAdapter(pedidos, requireContext())
         mAdapter!!.setPedidoRecycleViewOnClick(this)
         val mLayoutManager = LinearLayoutManager(requireContext())

@@ -14,6 +14,7 @@ import br.com.easypark.backend.data.CategoriaDAO;
 import br.com.easypark.backend.data.ClienteDAO;
 import br.com.easypark.backend.data.MesaDAO;
 import br.com.easypark.backend.data.PedidoDAO;
+import br.com.easypark.backend.data.PedidoProdutoDAO;
 import br.com.easypark.backend.data.ProdutoDAO;
 import br.com.easypark.backend.data.TruckDAO;
 import br.com.easypark.backend.data.UserDAO;
@@ -21,6 +22,7 @@ import br.com.easypark.backend.model.entity.Categoria;
 import br.com.easypark.backend.model.entity.Cliente;
 import br.com.easypark.backend.model.entity.Mesa;
 import br.com.easypark.backend.model.entity.Pedido;
+import br.com.easypark.backend.model.entity.PedidoProduto;
 import br.com.easypark.backend.model.entity.Produto;
 import br.com.easypark.backend.model.entity.Truck;
 import br.com.easypark.backend.model.entity.User;
@@ -36,11 +38,12 @@ public class DataInitializer implements ApplicationRunner {
     private PedidoDAO pedidoDao;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     private CategoriaDAO categoriaDao;
+    private PedidoProdutoDAO pedidoProdutoDAO;
 
     @Autowired
     public DataInitializer(ClienteDAO userRepository, BCryptPasswordEncoder bCryptPasswordEncoder,
     		ProdutoDAO produtoRepository, TruckDAO truckDao, MesaDAO mesaRepository, PedidoDAO pedidoDao
-    		,CategoriaDAO categoriaDao) {
+    		,CategoriaDAO categoriaDao, PedidoProdutoDAO pedidoProdutoDao) {
         this.clienteRepository = userRepository;
         this.truckDao = truckDao;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
@@ -48,6 +51,7 @@ public class DataInitializer implements ApplicationRunner {
         this.mesaRepository = mesaRepository;
         this.pedidoDao = pedidoDao;
         this.categoriaDao = categoriaDao;
+        this.pedidoProdutoDAO = pedidoProdutoDao;
     }
 
     @Override
@@ -113,9 +117,14 @@ public class DataInitializer implements ApplicationRunner {
         	
         	this.pedidoDao.save(pedido);
         	
-        	pedido.setProdutos(Arrays.asList(xcoalho,pizza));
+        	PedidoProduto pedidotemaki = new PedidoProduto(temaki, pedido,3);
+        	PedidoProduto pedidoCoxinha = new PedidoProduto(coxinha, pedido, 5);
         	
-        	this.pedidoDao.save(pedido);
+        	
+        	this.pedidoProdutoDAO.save(pedidotemaki);
+        	this.pedidoProdutoDAO.save(pedidoCoxinha);
+        	
+        
         	
         	System.out.println("Inserted Empty data");
         	
