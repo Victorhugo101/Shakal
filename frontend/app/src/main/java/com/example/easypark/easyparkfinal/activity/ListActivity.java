@@ -1,10 +1,14 @@
 package com.example.easypark.easyparkfinal.activity;
 
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.example.easypark.easyparkfinal.R;
 
@@ -12,6 +16,7 @@ import com.example.easypark.easyparkfinal.beans.Truck;
 import com.example.easypark.easyparkfinal.beans.TruckListSerializable;
 import com.example.easypark.easyparkfinal.fragments.FoodTruckListFragment;
 import com.example.easypark.easyparkfinal.network.TruckService;
+import com.example.easypark.easyparkfinal.session.SessionManager;
 
 import java.util.List;
 
@@ -87,6 +92,29 @@ public class ListActivity extends AppCompatActivity {
             getFragmentManager().popBackStack();
         }*/
 
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.session_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.itLogout:
+                performLogout();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void performLogout(){
+        SessionManager.getInstance().getSession().invalidate();
+        Intent myIntent = new Intent(this, LoginActivity.class);
+        startActivity(myIntent);
     }
 
 }

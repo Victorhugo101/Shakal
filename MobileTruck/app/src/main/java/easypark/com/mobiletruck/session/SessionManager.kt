@@ -42,7 +42,9 @@ class SessionManager {
             }
 
             override fun invalidate() {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                sharedPreferences.edit().remove("email")
+                        .remove("senha")
+                        .remove("token").apply()
             }
 
             override fun isLoggedIn(): Boolean {
