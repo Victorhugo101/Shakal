@@ -17,14 +17,14 @@ public class RetrofitBuilder {
 
     public static IBackendAPI getApiService() {
         if (backendAPI == null) {
-            backendAPI = RetrofitBuilder.provideRetrofit(Constants.BASE_URL).create(IBackendAPI.class);
+            backendAPI = RetrofitBuilder.provideRetrofit().create(IBackendAPI.class);
         }
         return backendAPI;
     }
 
-    public static Retrofit provideRetrofit(String url) {
+    public static Retrofit provideRetrofit() {
         return new Retrofit.Builder()
-                .baseUrl(url)
+                .baseUrl(Constants.BASE_URL)
                 .client(provideOkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create(new Gson()))
                 .build();
@@ -35,7 +35,7 @@ public class RetrofitBuilder {
         okhttpClientBuilder.readTimeout(30, TimeUnit.SECONDS);
         okhttpClientBuilder.writeTimeout(30, TimeUnit.SECONDS);
 
-        //okhttpClientBuilder.addInterceptor(new TokenRenewInterceptor());
+
         okhttpClientBuilder.addInterceptor(new AuthorizationInterceptor());
         return okhttpClientBuilder.build();
     }

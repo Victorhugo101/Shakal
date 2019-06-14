@@ -20,7 +20,7 @@ public class Mesa {
 	 private Long id;
 	
 	 @NotBlank
-	 private String qrCode;
+	 private String qrcode;
 	 
 	 private int capacidade;
 	 
@@ -36,7 +36,7 @@ public class Mesa {
 	 }
 	 
 	 public Mesa(String qrCode, int capacidade) {
-		this.qrCode = qrCode;
+		this.qrcode = qrCode;
 		this.capacidade = capacidade;
 	 }
 
@@ -49,11 +49,11 @@ public class Mesa {
 	}
 
 	public String getQrCode() {
-		return qrCode;
+		return qrcode;
 	}
 
 	public void setQrCode(String qrCode) {
-		this.qrCode = qrCode;
+		this.qrcode = qrCode;
 	}
 
 	public int getCapacidade() {

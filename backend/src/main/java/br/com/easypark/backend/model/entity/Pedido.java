@@ -37,8 +37,10 @@ public class Pedido {
 	 private Truck truck;
 	 
 	 
-	 @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	 @JoinTable(name = "mtm_pedido_produto", joinColumns = @JoinColumn(name = "id_pedido"), inverseJoinColumns = @JoinColumn(name = "id_produto"))
+	 @ManyToMany(cascade =  CascadeType.MERGE)
+	 @JoinTable(name = "mtm_pedido_produto", joinColumns = 
+	 @JoinColumn(name = "id_pedido",referencedColumnName = "id"), 
+	 		inverseJoinColumns = @JoinColumn(name = "id_produto",referencedColumnName = "id"))
 	 private List<Produto> produtos;
 	 
 	 
@@ -46,24 +48,24 @@ public class Pedido {
 	 @JoinColumn(name = "id_mesa")
 	 private Mesa mesa;
 
-	 public Pedido() {
-		
-		}
+	 public Pedido() {}
 	 
 
-	public Pedido(StatusPedidoEnum status, Cliente cliente, List<Produto> produtos, Mesa mesa) {
+	public Pedido( Cliente cliente, List<Produto> produtos, Mesa mesa, Truck truck) {
 		super();
 		this.status = StatusPedidoEnum.PREPARANDO;
 		this.cliente = cliente;
 		this.produtos = produtos;
 		this.mesa = mesa;
+		this.truck = truck;
 	}
-	public Pedido(Cliente cliente, Mesa mesa) {
+	public Pedido(Cliente cliente, Mesa mesa, Truck truck) {
 		super();
-		this.status = status;
+		this.status = StatusPedidoEnum.PREPARANDO;
 		this.cliente = cliente;
 		this.produtos = new ArrayList<>();
 		this.mesa = mesa;
+		this.truck = truck;
 	}
 
 	public Long getId() {

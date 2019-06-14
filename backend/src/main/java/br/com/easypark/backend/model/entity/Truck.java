@@ -15,6 +15,7 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "tb_truck")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Truck extends User{
 
 
@@ -28,8 +29,8 @@ public class Truck extends User{
 	 
 	 private double longitude;
 	 
-	 @OneToMany(mappedBy = "truck")
-	 private List<Produto> produtos = new ArrayList<>();
+	 @OneToMany(mappedBy = "truck",cascade = CascadeType.MERGE,orphanRemoval = true)
+	 private List<Produto> produtos;
 	 
 	 
 	 public Truck( ) {

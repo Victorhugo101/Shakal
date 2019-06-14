@@ -1,6 +1,6 @@
 package com.example.easypark.easyparkfinal.session;
 
-public interface Session {
+public interface ISession {
 
     boolean isLoggedIn();
 

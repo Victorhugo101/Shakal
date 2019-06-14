@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 public class SessionManager {
 
     private static SessionManager instance;
-    private Session session;
+    private ISession session;
     private SharedPreferences sharedPreferences;
 
     public static SessionManager getInstance(){
@@ -20,16 +20,16 @@ public class SessionManager {
         this.sharedPreferences = sharedPreferences;
     }
 
-    public Session getSession() {
+    public ISession getSession() {
         return session;
     }
-    public void setSession(Session session){
+    public void setSession(ISession session){
         this.session = session;
     }
 
-    public Session createSession(SharedPreferences shared){
+    public ISession createSession(SharedPreferences shared){
         this.sharedPreferences =shared;
-        session = new Session() {
+        session = new ISession() {
             @Override
             public boolean isLoggedIn() {
                 return sharedPreferences.contains("token");

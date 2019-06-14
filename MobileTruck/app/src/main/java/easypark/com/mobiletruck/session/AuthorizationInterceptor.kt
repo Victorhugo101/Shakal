@@ -13,7 +13,7 @@ class AuthorizationInterceptor: Interceptor {
     }
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        //val mainResponse = chain.proceed(chain.request())
+
         var mainRequest = chain.request()
 
         if (session.isLoggedIn()) {

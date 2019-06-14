@@ -20,7 +20,7 @@ public class Produto {
 	 @NotBlank
 	 private String nome;
 	 
-	 @NotBlank
+	 
 	 private double valor;
 	 
 	 @ManyToOne(fetch = FetchType.LAZY)
@@ -30,6 +30,9 @@ public class Produto {
 	 @ManyToOne(fetch = FetchType.LAZY)
 	 @JoinColumn(name = "id_truck")
 	 private Truck truck;
+	 
+	 
+	 
 	 
 	 public Produto() {
 			

@@ -14,7 +14,7 @@ interface BackendAPI {
 
 
     @GET("/pedido/listar/truck/{id}")
-    fun list() : Call<PedidoOverviewDTO>
+    fun lisarPedidos() : Call<List<PedidoOverviewDTO>>
 
 /*
     @Headers("Content-Type: application/json")

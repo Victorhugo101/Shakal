@@ -1,28 +1,28 @@
 package com.example.easypark.easyparkfinal.activity;
 
-import android.app.FragmentManager;
-import android.content.Intent;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+        import android.app.FragmentManager;
+        import android.content.Intent;
+        import android.support.v4.app.FragmentTransaction;
+        import android.support.v7.app.AppCompatActivity;
+        import android.os.Bundle;
+        import android.util.Log;
+        import android.view.Menu;
+        import android.view.MenuInflater;
+        import android.view.MenuItem;
 
-import com.example.easypark.easyparkfinal.R;
+        import com.example.easypark.easyparkfinal.R;
 
-import com.example.easypark.easyparkfinal.beans.Truck;
-import com.example.easypark.easyparkfinal.beans.TruckListSerializable;
-import com.example.easypark.easyparkfinal.fragments.FoodTruckListFragment;
-import com.example.easypark.easyparkfinal.network.TruckService;
-import com.example.easypark.easyparkfinal.session.SessionManager;
+        import com.example.easypark.easyparkfinal.beans.Truck;
+        import com.example.easypark.easyparkfinal.beans.TruckListSerializable;
+        import com.example.easypark.easyparkfinal.fragments.FoodTruckListFragment;
+        import com.example.easypark.easyparkfinal.network.TruckService;
+        import com.example.easypark.easyparkfinal.session.SessionManager;
 
-import java.util.List;
+        import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+        import retrofit2.Call;
+        import retrofit2.Callback;
+        import retrofit2.Response;
 
 
 public class ListActivity extends AppCompatActivity {
@@ -107,7 +107,7 @@ public class ListActivity extends AppCompatActivity {
                 performLogout();
                 return true;
             default:
-                return super.onOptionsItemSelected(item);
+                return false;
         }
     }
 

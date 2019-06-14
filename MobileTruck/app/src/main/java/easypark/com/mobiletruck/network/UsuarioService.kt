@@ -4,11 +4,10 @@ package easypark.com.mobiletruck.network
 import easypark.com.mobiletruck.model.LoginDTO
 import easypark.com.mobiletruck.model.Token
 import easypark.com.mobiletruck.session.BackendRetrofitBuilder
-import easypark.com.mobiletruck.utils.Constants
+
 
 import retrofit2.Call
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+
 
 
 class UsuarioService {

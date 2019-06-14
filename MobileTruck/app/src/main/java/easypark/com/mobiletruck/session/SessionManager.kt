@@ -1,7 +1,6 @@
 package easypark.com.mobiletruck.session
 
-import android.content.Context
-import android.content.Intent
+
 import android.content.SharedPreferences
 
 class SessionManager {

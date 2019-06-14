@@ -13,15 +13,17 @@ public class PedidoEntradaDTO implements Serializable{
 	private Long cliente;
 	private List<ProdutoQuantidadeDTO> produtos;
 	private Long mesa;
+	private Long truck;
 	
 	public PedidoEntradaDTO() {
 		
 	}
-	public PedidoEntradaDTO(Long cliente, List<ProdutoQuantidadeDTO> produtos, Long mesa) {
+	public PedidoEntradaDTO(Long cliente, List<ProdutoQuantidadeDTO> produtos, Long mesa, Long truck) {
 		super();
 		this.cliente = cliente;
 		this.produtos = produtos;
 		this.mesa = mesa;
+		this.truck = truck;
 	}
 	
 	
@@ -35,6 +37,12 @@ public class PedidoEntradaDTO implements Serializable{
 	
 
 
+	public Long getTruck() {
+		return truck;
+	}
+	public void setTruck(Long truck) {
+		this.truck = truck;
+	}
 	public List<ProdutoQuantidadeDTO> getProdutos() {
 		return produtos;
 	}
