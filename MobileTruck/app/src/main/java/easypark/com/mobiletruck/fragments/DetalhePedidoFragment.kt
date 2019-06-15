@@ -22,7 +22,12 @@ import easypark.com.mobiletruck.adapter.ProdutoAdapter
 import easypark.com.mobiletruck.model.Produto
 import easypark.com.mobiletruck.model.ProdutoOverviewDTO
 import easypark.com.mobiletruck.model.ProdutoPedido
+import easypark.com.mobiletruck.network.PedidoService
 import easypark.com.mobiletruck.parcelables.PedidoDetalheParcelable
+import easypark.com.mobiletruck.utils.MessageBuilder
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class DetalhePedidoFragment : Fragment() {
@@ -44,7 +49,7 @@ class DetalhePedidoFragment : Fragment() {
         txtNumeroPedido = view.findViewById( R.id.textNumeroPedido)
         txtNumeroMesa = view.findViewById( R.id.textNumeroMesa)
         btnFinalizar = view.findViewById<Button>(R.id.btnFinalizarPedido)
-        btnFinalizar.setOnClickListener{finalziarPedido()}
+        btnFinalizar.setOnClickListener{finalziarPedido(pedido.id.toLong())}
         this.carregarProdutos( )
         return view
     }
@@ -65,11 +70,25 @@ class DetalhePedidoFragment : Fragment() {
 
     }
 
-    private fun finalziarPedido(){
-        val fragmentTransaction = (context as AppCompatActivity)!!.supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.main_container, ListPedidosFragment.newInstance())
-        fragmentTransaction.addToBackStack("DetalhesPedido")
-        fragmentTransaction.commit()
+    private fun finalziarPedido(id: Long){
+
+        val call = PedidoService.newInstance().finalizarPedido(id)
+        call.enqueue(object : Callback<Boolean> {
+            override fun onResponse(call: Call<Boolean>?,
+                                    response: Response<Boolean>?) {
+                val fragmentTransaction = (context as AppCompatActivity)!!.supportFragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.main_container, ListPedidosFragment.instance)
+                fragmentTransaction.addToBackStack("DetalhesPedido")
+                fragmentTransaction.commit()
+
+            }
+
+            override fun onFailure(call: Call<Boolean>, t: Throwable) {
+                MessageBuilder.exibirMensagem(t.message.orEmpty(),this@DetalhePedidoFragment.requireContext())
+            }
+
+        })
+
     }
 
     companion object {

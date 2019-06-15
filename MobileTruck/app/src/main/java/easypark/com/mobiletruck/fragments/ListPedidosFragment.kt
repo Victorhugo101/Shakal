@@ -62,7 +62,11 @@ class ListPedidosFragment : Fragment(), RecycleViewClickListener
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         }
 
-        fun newInstance() = ListPedidosFragment()
+        var instance = ListPedidosFragment()
+        fun newInstance(): ListPedidosFragment {
+            instance = ListPedidosFragment()
+            return instance
+        }
     }
 
 

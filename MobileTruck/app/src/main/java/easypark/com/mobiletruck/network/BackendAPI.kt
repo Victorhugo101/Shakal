@@ -20,6 +20,9 @@ interface BackendAPI {
     @GET("/pedido/detalhe/{id}")
     fun detalharPedido(@Path("id")  id: Long ) : Call<PedidoDetalhe>
 
+    @PUT("/pedido/finalizar/{id}")
+    fun finalizarPedido(@Path("id")  id: Long ) : Call<Boolean>
+
 /*
     @Headers("Content-Type: application/json")
     @GET("/produto/categoria/{id}")

@@ -90,7 +90,7 @@ public class PedidoService {
 						p.getId().intValue(),
 						p.getCliente().getUsername(),
 						p.getMesa().getId().intValue(),
-						"PREPARANDO"));
+						p.getStatus().toString()));
 			}
 
 		}
@@ -103,7 +103,7 @@ public class PedidoService {
 		return PedidoMapper.entityToDetail(pedido);
 	}
 
-	public Boolean finalizarPedido(long pedidoId, long truckId) {
+	public Boolean finalizarPedido(long pedidoId) {
 		Pedido pedido = this.pedidoDAO.findById(pedidoId)
 				.orElseThrow(() -> new ResourceNotFoundException("Pedido Não encontrado"));
 		pedido.setStatus(StatusPedidoEnum.FINALIZADO);

@@ -18,6 +18,11 @@ class PedidoService {
         return instance.detalharPedido(id)
     }
 
+    fun finalizarPedido(id: Long): Call<Boolean> {
+        var instance = BackendRetrofitBuilder.instance.backendAPI
+        return instance.finalizarPedido(id)
+    }
+
     companion object {
         fun newInstance() = PedidoService()
     }
