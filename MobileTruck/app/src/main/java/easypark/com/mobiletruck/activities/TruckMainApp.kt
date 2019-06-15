@@ -24,29 +24,9 @@ class TruckMainApp : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        if(savedInstanceState == null) {
-            val call = PedidoService.newInstance().listarPedidos()
-            call.enqueue(object : Callback<List<PedidoOverviewDTO>> {
-                override fun onResponse(call: Call<List<PedidoOverviewDTO>?>?,
-                                        response: Response<List<PedidoOverviewDTO>?>?) {
-                    var fragment = ListPedidosFragment.newInstance()
-
-                    val args = Bundle()
-                    val lista = ListPedidosOverviewDTO(response!!.body().orEmpty())
-                    args.putParcelable("pedidos",lista)
-
-                    fragment.arguments = args
-                    replaceFragment(fragment)
-
-                }
-
-                override fun onFailure(call: Call<List<PedidoOverviewDTO>?>?,
-                                       t: Throwable?) {
-                }
 
 
-            })
-        }
+        this.loadFragment()
     }
 
     private fun replaceFragment(fragment: Fragment) {
@@ -72,6 +52,29 @@ class TruckMainApp : AppCompatActivity() {
         SessionManager.instance.session.invalidate()
         val myIntent = Intent(this, LoginActivity::class.java)
         startActivity(myIntent)
+    }
+    fun loadFragment(){
+        val call = PedidoService.newInstance().listarPedidos(SessionManager.instance.session.getId())
+        call.enqueue(object : Callback<List<PedidoOverviewDTO>> {
+            override fun onResponse(call: Call<List<PedidoOverviewDTO>?>?,
+                                    response: Response<List<PedidoOverviewDTO>?>?) {
+                var fragment = ListPedidosFragment.newInstance()
+
+                val args = Bundle()
+                val lista = ListPedidosOverviewDTO(response!!.body().orEmpty())
+                args.putParcelable("pedidos",lista)
+
+                fragment.arguments = args
+                replaceFragment(fragment)
+
+            }
+
+            override fun onFailure(call: Call<List<PedidoOverviewDTO>?>?,
+                                   t: Throwable?) {
+            }
+
+
+        })
     }
 
 }

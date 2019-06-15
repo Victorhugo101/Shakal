@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import br.com.easypark.backend.model.dto.PedidoDetalheDTO;
 import br.com.easypark.backend.model.dto.PedidoEntradaDTO;
+import br.com.easypark.backend.model.dto.PedidoOverviewTruckDTO;
 import br.com.easypark.backend.model.dto.PedidoSaidaDTO;
 import br.com.easypark.backend.service.PedidoService;
 
@@ -45,8 +46,14 @@ public class PedidoController {
 	 }
 	 
 	 @GetMapping("/listar/truck/{id}")
-	 public ResponseEntity<List<PedidoSaidaDTO>> listTruck(@PathVariable long id) {
-		return new ResponseEntity<List<PedidoSaidaDTO>>(this.pedidoService.listarPedidosTruck(id),HttpStatus.OK);
+	 public ResponseEntity<List<PedidoOverviewTruckDTO>> listTruck(@PathVariable long id) {
+		return new ResponseEntity<List<PedidoOverviewTruckDTO>>(this.pedidoService.listarPedidosTruck(id),HttpStatus.OK);
+		 
+	 }
+	 
+	 @GetMapping("/detalhe/{id}")
+	 public ResponseEntity<PedidoDetalheDTO> detalharPedido(@PathVariable long id) {
+		return new ResponseEntity<PedidoDetalheDTO>(this.pedidoService.getDetalhesPedido(id),HttpStatus.OK);
 		 
 	 }
 	 

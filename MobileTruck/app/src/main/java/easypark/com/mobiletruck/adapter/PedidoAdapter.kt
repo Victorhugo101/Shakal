@@ -12,8 +12,14 @@ import easypark.com.mobiletruck.R
 import easypark.com.mobiletruck.fragments.DetalhePedidoFragment
 import easypark.com.mobiletruck.model.PedidoOverviewDTO
 import android.support.v7.app.AppCompatActivity
-
-
+import android.util.Log
+import easypark.com.mobiletruck.model.PedidoDetalhe
+import easypark.com.mobiletruck.network.PedidoService
+import easypark.com.mobiletruck.parcelables.ListProdutoPedido
+import easypark.com.mobiletruck.parcelables.PedidoDetalheParcelable
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class PedidoAdapter(private val pedidos: MutableList<PedidoOverviewDTO>, private val context: Context)
@@ -32,11 +38,11 @@ class PedidoAdapter(private val pedidos: MutableList<PedidoOverviewDTO>, private
         viewHolder.codigo.text = pedido.id.toString()
         viewHolder.numeroMesa.text = pedido.mesa.toString()
         viewHolder.nomeCliente.text = pedido.nomeCliente
-        viewHolder.status.text = pedido.status.toString()
+        viewHolder.status.text = pedido.status
 
 
         viewHolder.itemView.setOnClickListener { v ->
-            chamaProximoFragmento(p1,DetalhePedidoFragment.newInstance())
+            chamaProximoFragmento(pedido.id)
         }
 
 
@@ -44,18 +50,50 @@ class PedidoAdapter(private val pedidos: MutableList<PedidoOverviewDTO>, private
         //val manager = (context as AppCompatActivity).supportFragmentManager
     }
 
-    fun chamaProximoFragmento(position: Int, fragmento: Fragment) {
+    fun chamaProximoFragmento(id: Int) {
+        val call = PedidoService.newInstance().detalharPedidos(id.toLong())
+        call.enqueue(object : Callback<PedidoDetalhe> {
+            override fun onResponse(call: Call<PedidoDetalhe>?,
+                                    response: Response<PedidoDetalhe>?) {
 
-        val bundle = Bundle()
-        //bundle.putSerializable("produto", pedido)
 
-        //val fragment = DetalhePedidoFragment.newInstance()
-        //fragment.setArguments(bundle)
+                var fragment = DetalhePedidoFragment.newInstance()
 
-        val fragmentTransaction = (context as AppCompatActivity)!!.supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.main_container, fragmento)
-        fragmentTransaction.addToBackStack("ListaPedido")
-        fragmentTransaction.commit()
+
+                val listaProdutoPedidoParcelabe = ListProdutoPedido(response!!.body()!!.produtos)
+                val detalheParcelable = PedidoDetalheParcelable(
+                        response!!.body()!!.id,
+                        response!!.body()!!.nomeCliente,
+                        response!!.body()!!.mesa,
+                        response!!.body()!!.status,
+                        listaProdutoPedidoParcelabe
+                )
+
+
+
+                val args = Bundle()
+                args.putParcelable("pedido",detalheParcelable)
+                fragment.arguments = args
+
+                val fragmentTransaction = (context as AppCompatActivity)!!.supportFragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.main_container, fragment)
+                fragmentTransaction.addToBackStack("ListaPedido")
+                fragmentTransaction.commit()
+
+            }
+
+            override fun onFailure(call: Call<PedidoDetalhe>?,
+                                   t: Throwable?) {
+                Log.d("MEnsagem",t.toString())
+            }
+
+
+        })
+
+
+
+
+
     }
     override fun getItemCount(): Int {
         return pedidos.size

@@ -12,6 +12,7 @@ import br.com.easypark.backend.data.UserDAO;
 import br.com.easypark.backend.model.dto.ClienteCadastroDTO;
 import br.com.easypark.backend.model.dto.LoginDTO;
 import br.com.easypark.backend.model.entity.Cliente;
+import br.com.easypark.backend.model.entity.User;
 import br.com.easypark.backend.utils.Messages;
 
 @Service
@@ -51,7 +52,7 @@ public class UsuarioService  implements UserDetailsService{
                 .orElseThrow(() -> new BadCredentialsException(Messages.USER_NOT_FOUND));
     }
 	
-    public UserDetails loadUserByEmail(String email) throws UsernameNotFoundException {
+    public User loadUserByEmail(String email) throws UsernameNotFoundException {
 
         return this.userDao.findByEmail(email)
                 .orElseThrow(() -> new BadCredentialsException(Messages.USER_NOT_FOUND));

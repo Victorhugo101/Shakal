@@ -19,23 +19,30 @@ import easypark.com.mobiletruck.R
 import easypark.com.mobiletruck.R.id.rv_lista_produtos_pedido
 import easypark.com.mobiletruck.activities.TruckMainApp
 import easypark.com.mobiletruck.adapter.ProdutoAdapter
+import easypark.com.mobiletruck.model.Produto
 import easypark.com.mobiletruck.model.ProdutoOverviewDTO
+import easypark.com.mobiletruck.model.ProdutoPedido
+import easypark.com.mobiletruck.parcelables.PedidoDetalheParcelable
 
 
 class DetalhePedidoFragment : Fragment() {
 
     private var mAdapter: ProdutoAdapter? = null
-    private val produtos = mutableListOf<ProdutoOverviewDTO>()
+    private lateinit var pedido: PedidoDetalheParcelable;
+    private var produtos = mutableListOf<ProdutoPedido>()
     private lateinit var listView: RecyclerView
-    private lateinit var textView: TextView
+    private lateinit var txtNumeroPedido: TextView
+    private lateinit var txtNumeroMesa: TextView
     private lateinit var btnFinalizar: Button
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
 
         val view = inflater.inflate(R.layout.fragment_detalhe_pedido, container, false)
         listView = view.findViewById( R.id.rv_lista_produtos_pedido)
-        textView = view.findViewById( R.id.textNumeroPedido)
+        txtNumeroPedido = view.findViewById( R.id.textNumeroPedido)
+        txtNumeroMesa = view.findViewById( R.id.textNumeroMesa)
         btnFinalizar = view.findViewById<Button>(R.id.btnFinalizarPedido)
         btnFinalizar.setOnClickListener{finalziarPedido()}
         this.carregarProdutos( )
@@ -45,19 +52,12 @@ class DetalhePedidoFragment : Fragment() {
     private fun carregarProdutos(){
 
 
-        produtos.add(0, ProdutoOverviewDTO(1,"Hamburger de siri",3))
-        produtos.add(1, ProdutoOverviewDTO(1,"Hamburger de merda",3))
-        produtos.add(2, ProdutoOverviewDTO(1,"Hamburger de Big Bosta",3))
+        pedido = arguments!!.getParcelable<PedidoDetalheParcelable>("pedido")
+        txtNumeroPedido.text = "Pedido número "  + pedido.id.toString()
+        txtNumeroMesa.text = "Mesa " + pedido.mesa.toString()
+        produtos = arguments!!.getParcelable<PedidoDetalheParcelable>("pedido").produtos.peodutosPedido.toMutableList()
         mAdapter = ProdutoAdapter(produtos, requireContext())
         val mLayoutManager = LinearLayoutManager(requireContext())
-
-    /*
-        listView.layoutManager = mLayoutManager
-        listView.itemAnimator = DefaultItemAnimator()
-        listView.adapter = mAdapter
-*/
-
-
 
         listView.layoutManager = mLayoutManager
         listView.itemAnimator = DefaultItemAnimator()

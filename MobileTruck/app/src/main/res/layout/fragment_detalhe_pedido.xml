@@ -1,31 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="8dp"
+    android:orientation="vertical"
     tools:context=".fragments.DetalhePedidoFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/textNumeroPedido"
+
+
+    <LinearLayout
+        android:id="@+id/topLayoutDetalhePedido"
+        android:layout_margin="16dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Disgraçaaaaa"/>
+        android:layout_height="72dp"
+        android:orientation="vertical"
+        android:layout_alignParentStart="true">
+        <TextView
+            android:id="@+id/textNumeroPedido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            />
+        <TextView
+            android:id="@+id/textNumeroMesa"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="16dp"
+            />
+    </LinearLayout>
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_lista_produtos_pedido"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="8dp"/>
+        android:layout_height="match_parent"
+        android:layout_below="@id/topLayoutDetalhePedido"
+        >
+
+    </android.support.v7.widget.RecyclerView>
 
     <Button
         android:id="@+id/btnFinalizarPedido"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:text="Finalizar Pedido"
-        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
         android:background="@color/primaryButton"
         android:textColor="@color/colorTextBtn"/>
 
-</FrameLayout>
+</RelativeLayout>

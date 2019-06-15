@@ -21,7 +21,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import android.widget.Toast
-
+import easypark.com.mobiletruck.session.SessionManager
 
 
 class LoginActivity : AppCompatActivity() {
@@ -55,7 +55,10 @@ class LoginActivity : AppCompatActivity() {
                     val sp = getSharedPreferences("usuario", Context.MODE_PRIVATE)
                     val ed = sp.edit()
                     ed.putString("token", response.body()!!.token)
+                    ed.putLong("id", response.body()!!.id)
+                    ed.putString("email", response.body()!!.email)
                     ed.commit()
+                    initializeSession()
                     val intent = Intent(applicationContext, TruckMainApp::class.java)
                     startActivity(intent)
                 } else
@@ -75,7 +78,9 @@ class LoginActivity : AppCompatActivity() {
     fun exibirMensagem(mensagem: String) {
         Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show()
     }
-
+    fun initializeSession(){
+        SessionManager.instance.createSession(getSharedPreferences("usuario", Context.MODE_PRIVATE))
+    }
 
 
 

@@ -59,9 +59,16 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
             HttpServletRequest req,
             HttpServletResponse res, FilterChain chain,
             Authentication auth) throws IOException, ServletException {
+    	AuthenticationContext customAuth = (AuthenticationContext) auth;
     	
+    	String token = TokenAuthenticationService.addAuthentication(
+    			customAuth.getId(),
+    			customAuth.getName(),
+    			customAuth.getAuthorities());
     	String json = new Gson().toJson( new TokenDTO(
-    		TokenAuthenticationService.addAuthentication(Long.valueOf(1),auth.getName(),auth.getAuthorities())
+    			customAuth.getId(),
+    			customAuth.getEmail(),
+    			token
     	));
     	res.setContentType("application/json");
         res.setCharacterEncoding("UTF-8");

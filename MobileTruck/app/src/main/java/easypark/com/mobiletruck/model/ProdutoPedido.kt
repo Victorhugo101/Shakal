@@ -4,6 +4,6 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
 
-
 @Parcelize
-class PedidoOverviewDTO(val id: Int, val nomeCliente: String, val mesa: Int, val status: String): Serializable, Parcelable
+class ProdutoPedido(val id: Int, val nome: String, val valor: Double, val quantidade: Int):Parcelable, Serializable {
+}

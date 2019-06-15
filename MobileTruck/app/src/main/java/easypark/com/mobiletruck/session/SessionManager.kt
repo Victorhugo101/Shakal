@@ -13,6 +13,16 @@ class SessionManager {
     fun createSession(sharedPreferences: SharedPreferences){
         this.sharedPreferences = sharedPreferences
         this.session = object : Session{
+            override fun getId(): Long {
+                return sharedPreferences.getLong("id",0)
+
+            }
+
+            override fun saveId(id: Long) {
+                sharedPreferences.edit()
+                        .putLong("id",id).apply()
+            }
+
             override fun saveToken(token: String) {
                 sharedPreferences.edit()
                         .putString("token",token).apply()

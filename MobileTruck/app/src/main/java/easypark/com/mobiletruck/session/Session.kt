@@ -12,6 +12,10 @@ interface Session {
 
     fun getEmail(): String?
 
+    fun getId(): Long
+
+    fun saveId(id: Long)
+
     fun savePassword(password: String)
 
     fun getPassword(): String?

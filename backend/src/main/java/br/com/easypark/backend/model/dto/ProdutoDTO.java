@@ -11,8 +11,8 @@ public class ProdutoDTO implements Serializable{
 	 */
 	private static final long serialVersionUID = -1305963418635418690L;
 	private Long id;
-	 private String nome;
-	 private String valor;
+	private String nome;
+	private String valor;
 	 
 	 
 	 

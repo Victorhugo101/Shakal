@@ -1,6 +1,7 @@
 package easypark.com.mobiletruck.network
 
 import easypark.com.mobiletruck.model.LoginDTO
+import easypark.com.mobiletruck.model.PedidoDetalhe
 import easypark.com.mobiletruck.model.PedidoOverviewDTO
 import easypark.com.mobiletruck.model.Token
 import retrofit2.Call
@@ -14,7 +15,10 @@ interface BackendAPI {
 
 
     @GET("/pedido/listar/truck/{id}")
-    fun lisarPedidos() : Call<List<PedidoOverviewDTO>>
+    fun lisarPedidos(@Path("id")  id: Long ) : Call<List<PedidoOverviewDTO>>
+
+    @GET("/pedido/detalhe/{id}")
+    fun detalharPedido(@Path("id")  id: Long ) : Call<PedidoDetalhe>
 
 /*
     @Headers("Content-Type: application/json")

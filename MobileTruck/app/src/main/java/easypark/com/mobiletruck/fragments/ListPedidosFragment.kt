@@ -41,15 +41,11 @@ class ListPedidosFragment : Fragment(), RecycleViewClickListener
 
     override fun onClickListener(view: View?, position: Int) {
         val adapter = recyclerView.getAdapter() as PedidoAdapter
-        adapter.chamaProximoFragmento(position, this)
+        adapter.chamaProximoFragmento(position)
     }
 
     private fun carregarPedidos(){
-        /*
-        pedidos.add(0,PedidoOverviewDTO(1,"Josenilsom",3,PedidoStatusEnum.PRONTO))
-        pedidos.add(1,PedidoOverviewDTO(2,"Robervalsom",3,PedidoStatusEnum.PREPARANDO))
-        pedidos.add(2,PedidoOverviewDTO(3,"Mariucleuçio",3,PedidoStatusEnum.PREPARANDO))
-        */
+
         this.pedidos =  arguments!!.getParcelable<ListPedidosOverviewDTO>("pedidos").pedidosOverviewDTO.toMutableList()
         mAdapter = PedidoAdapter(pedidos, requireContext())
         mAdapter!!.setPedidoRecycleViewOnClick(this)

@@ -9,8 +9,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import easypark.com.mobiletruck.R
 import easypark.com.mobiletruck.model.ProdutoOverviewDTO
+import easypark.com.mobiletruck.model.ProdutoPedido
 
-class ProdutoAdapter (private val produtos: MutableList<ProdutoOverviewDTO>, private val context: Context)
+class ProdutoAdapter (private val produtos: MutableList<ProdutoPedido>, private val context: Context)
     : RecyclerView.Adapter<ProdutoAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
@@ -23,7 +24,7 @@ class ProdutoAdapter (private val produtos: MutableList<ProdutoOverviewDTO>, pri
 
         //viewHolder.codigo.text = pedido.id.toString()
         viewHolder.nome.text = produto.nome
-        viewHolder.quantidade.text = produto.quantidade.toString()
+        viewHolder.quantidade.text = "Quantidade: " + produto.quantidade.toString()
         //viewHolder.preco.text = pedido. .toString()
 
 

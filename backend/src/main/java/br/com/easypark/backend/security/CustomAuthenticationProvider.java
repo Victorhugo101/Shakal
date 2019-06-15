@@ -1,6 +1,8 @@
 package br.com.easypark.backend.security;
 
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -11,6 +13,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
+import br.com.easypark.backend.model.entity.Role;
+import br.com.easypark.backend.model.entity.User;
 import br.com.easypark.backend.service.UsuarioService;
 import br.com.easypark.backend.utils.Messages;
 import br.com.easypark.backend.utils.PasswordEncoder;
@@ -31,13 +35,13 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String password = authentication.getCredentials().toString();
 
         try {
-            UserDetails user = this.userService.loadUserByEmail(email);
+            User user = this.userService.loadUserByEmail(email);
             if (encoder.bCryptPasswordEncoder().matches(password, user.getPassword())) {
-                return new UsernamePasswordAuthenticationToken(
-                        user.getUsername(),
-                        password,
-                        user.getAuthorities()
-                );
+            	
+            	AuthenticationContext auth = new AuthenticationContext(true, user.getId(), 
+            			user.getEmail(), user.getPassword(), user.getAuthorities());
+                return auth;
+                
             }else{
                 throw new BadCredentialsException(Messages.INVALID_PASSWORD);
             }
