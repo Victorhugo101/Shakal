@@ -8,4 +8,7 @@ public class MessageBuilder {
     public static void exibirMensagem(String mensagem, Context context){
         Toast.makeText(context,mensagem,Toast.LENGTH_SHORT).show();
     }
+    public static void exibirMensagem(String mensagem, Context context, int time){
+        Toast.makeText(context,mensagem,time).show();
+    }
 }

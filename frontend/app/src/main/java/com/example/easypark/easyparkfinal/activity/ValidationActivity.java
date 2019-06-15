@@ -4,6 +4,8 @@ package com.example.easypark.easyparkfinal.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
+
 import com.example.easypark.easyparkfinal.R;
 import com.example.easypark.easyparkfinal.beans.QrCode;
 import com.example.easypark.easyparkfinal.beans.TokenDTO;
@@ -24,7 +26,6 @@ public class ValidationActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_validation_code);
-        System.out.println("Shakal seja louvado");
         this.barCodeCapture();
     }
 
@@ -46,6 +47,9 @@ public class ValidationActivity extends AppCompatActivity{
             String barcode = scanResult.getContents();
             validate(barcode);
         }
+        else{
+
+        }
     }
 
     private void validate(String barcode){
@@ -59,7 +63,7 @@ public class ValidationActivity extends AppCompatActivity{
 
                 @Override
                 public void onFailure(Call<Long> call, Throwable t) {
-                    MessageBuilder.exibirMensagem("Código inválido", getApplicationContext());
+                    MessageBuilder.exibirMensagem("Código inválido", getApplicationContext(), Toast.LENGTH_LONG);
                 }
 
         });

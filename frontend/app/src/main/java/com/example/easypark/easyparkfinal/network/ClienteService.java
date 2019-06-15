@@ -23,15 +23,5 @@ public class ClienteService {
         return service.cadastrarUsuario(cliente);
     }
 
-    public static List<Truck> converterParaCliente(Response<List<Truck>> lista){
-        List<Truck> trucks = new ArrayList<>();
-        for (int i = 0; i < lista.body().size(); i++){
-            trucks.add(new Truck(
-                    lista.body().get(i).getId(),
-                    lista.body().get(i).getNome(),
-                    lista.body().get(i).getImg()
-            ));
-        }
-        return trucks;
-    }
+
 }

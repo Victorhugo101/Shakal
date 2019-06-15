@@ -2,6 +2,7 @@ package com.example.easypark.easyparkfinal.network;
 
 import com.example.easypark.easyparkfinal.beans.PedidoDTO;
 import com.example.easypark.easyparkfinal.beans.PedidoListView;
+import com.example.easypark.easyparkfinal.session.RetrofitBuilder;
 import com.example.easypark.easyparkfinal.utils.Constants;
 
 import java.util.ArrayList;
@@ -20,20 +21,13 @@ public class PedidoService {
 
 
     public static Call<Boolean> cadastrarPedido(PedidoDTO pedidoDTO){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        IBackendAPI service = retrofit.create(IBackendAPI.class);
+        IBackendAPI service = RetrofitBuilder.getApiService();
         return service.cadastrarPedido(pedidoDTO);
     }
 
-    public static Call<List<PedidoListView>> listarMeusPedidos(long id){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        IBackendAPI service = retrofit.create(IBackendAPI.class);
+    public static Call<List<PedidoListView>> listarMeusPedidos(Long id){
+
+        IBackendAPI service = RetrofitBuilder.getApiService();
         return service.listarMeusPedidos(id);
     }
 

@@ -9,7 +9,11 @@ public class SessionManager {
     private SharedPreferences sharedPreferences;
 
     public static SessionManager getInstance(){
-        return instance = (instance == null)? new SessionManager(): instance;
+        if(instance == null){
+            instance = new SessionManager();
+        }
+        return instance;
+
     }
 
     public SharedPreferences getSharedPreferences() {
@@ -61,7 +65,7 @@ public class SessionManager {
 
             @Override
             public Long getId() {
-                return sharedPreferences.getLong("token",0);
+                return sharedPreferences.getLong("id",0);
             }
 
             @Override
@@ -89,6 +93,7 @@ public class SessionManager {
                 ed.remove("senha");
                 ed.remove("email");
                 ed.remove("token");
+                ed.remove("id");
                 ed.commit();
             }
         };

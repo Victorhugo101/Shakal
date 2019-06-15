@@ -48,6 +48,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 validate();
 
+                btnCadastro.clearFocus();
+
             }
         });
 
@@ -56,6 +58,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 setBtnCadastro();
+                btnCadastro.clearFocus();
 
             }
         });
@@ -79,8 +82,9 @@ public class LoginActivity extends AppCompatActivity {
                     ed.putString("email", response.body().getEmail());
                     ed.putString("token", response.body().getToken());
                     ed.commit();
-                    initializeSession();
-                    goToQrCode();
+                    Intent myIntent = new Intent(getApplicationContext(), ValidationActivity.class);
+                    startActivity(myIntent);
+                    //goToQrCode();
                 }
                 else exibirMensagem("E-mail ou senha inválido!");
 
@@ -103,10 +107,13 @@ public class LoginActivity extends AppCompatActivity {
     public void exibirMensagem(String mensagem){
         Toast.makeText(this,mensagem,Toast.LENGTH_SHORT).show();
     }
+    /*
     private void goToQrCode(){
         Intent myIntent = new Intent(this, ValidationActivity.class);
         startActivity(myIntent);
+        this.finish();
     }
+    */
     public void showIPDialog(){
         final EditText txtIP = new EditText(this);
 

@@ -40,7 +40,7 @@ public interface IBackendAPI {
     Call<List<Truck>> listarTrucksPorMesa(@Path("id") Long id);
 
     @Headers("Content-Type: application/json")
-    @POST("/usuario/cadastrar")
+    @POST("/cliente/cadastrar")
     Call<Boolean> cadastrarUsuario(@Body Cliente cliente);
 
     @Headers("Content-Type: application/json")
@@ -52,7 +52,7 @@ public interface IBackendAPI {
     Call<Boolean> cadastrarPedido(@Body PedidoDTO pedidoDTO);
 
     @Headers("Content-Type: application/json")
-    @GET("/pedido/listar/{id}")
+    @GET("/pedido/listar/cliente/{id}")
     Call<List<PedidoListView>> listarMeusPedidos(@Path("id") Long id);
 
     //@Headers("Content-Type: application/json")

@@ -138,7 +138,7 @@ public class CarrinhoFragment extends Fragment {
         Toast.makeText(this.getContext(),mensagem,Toast.LENGTH_SHORT).show();
     }
     public void goToPreviewList(){
-        Call call = PedidoService.listarMeusPedidos(getActivity().getSharedPreferences("usuario",MODE_PRIVATE).getInt("id",1));
+        Call call = PedidoService.listarMeusPedidos(5L);
         call.enqueue(new Callback<List<PedidoListView>>() {
 
             @Override

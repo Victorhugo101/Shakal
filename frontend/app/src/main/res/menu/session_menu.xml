@@ -4,4 +4,8 @@
         android:title="Logout"
         />
 
+    <item android:id="@+id/itPedidos"
+        android:title="Meus pedidos"
+        />
+
 </menu>

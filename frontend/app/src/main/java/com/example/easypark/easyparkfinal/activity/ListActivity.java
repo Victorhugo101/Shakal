@@ -1,6 +1,7 @@
 package com.example.easypark.easyparkfinal.activity;
 
         import android.app.FragmentManager;
+        import android.content.Context;
         import android.content.Intent;
         import android.support.v4.app.FragmentTransaction;
         import android.support.v7.app.AppCompatActivity;
@@ -11,11 +12,17 @@ package com.example.easypark.easyparkfinal.activity;
 
         import com.example.easypark.easyparkfinal.R;
 
+        import com.example.easypark.easyparkfinal.beans.PedidoListSerializable;
+        import com.example.easypark.easyparkfinal.beans.PedidoListView;
         import com.example.easypark.easyparkfinal.beans.Truck;
         import com.example.easypark.easyparkfinal.beans.TruckListSerializable;
         import com.example.easypark.easyparkfinal.fragments.FoodTruckListFragment;
+        import com.example.easypark.easyparkfinal.fragments.ListaPedidosFragments;
+        import com.example.easypark.easyparkfinal.network.PedidoService;
         import com.example.easypark.easyparkfinal.network.TruckService;
+        import com.example.easypark.easyparkfinal.session.ISession;
         import com.example.easypark.easyparkfinal.session.SessionManager;
+        import com.example.easypark.easyparkfinal.utils.MessageBuilder;
 
         import java.util.List;
 
@@ -101,6 +108,9 @@ public class ListActivity extends AppCompatActivity {
             case R.id.itLogout:
                 performLogout();
                 return true;
+            case R.id.itPedidos:
+                listaPedidos();
+                return true;
             default:
                 return false;
         }
@@ -110,6 +120,36 @@ public class ListActivity extends AppCompatActivity {
         SessionManager.getInstance().getSession().invalidate();
         Intent myIntent = new Intent(this, LoginActivity.class);
         startActivity(myIntent);
+    }
+    private void listaPedidos(){
+
+            Call call = PedidoService.listarMeusPedidos(SessionManager.getInstance().getSession().getId());
+            call.enqueue(new Callback<List<PedidoListView>>() {
+
+                @Override
+                public void onResponse(Call<List<PedidoListView>> call, Response<List<PedidoListView>> response) {
+                    changeFragment(PedidoService.converterParaPedidoListView(response));
+
+                }
+
+                @Override
+                public void onFailure(Call<List<PedidoListView>> call, Throwable t) {
+                    MessageBuilder.exibirMensagem("Erro ao cadastrar o seu pedido",getApplicationContext());
+
+                }
+
+            });
+
+    }
+    public void changeFragment(List<PedidoListView> pedidos){
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("pedidos", new PedidoListSerializable(pedidos));
+
+        ListaPedidosFragments fragment = new ListaPedidosFragments();
+        fragment.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_container,
+                fragment).commit();
+        getSupportFragmentManager().executePendingTransactions();
     }
 
 }
