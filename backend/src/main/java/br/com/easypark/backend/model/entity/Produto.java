@@ -19,7 +19,7 @@ import javax.validation.constraints.NotBlank;
 public class Produto {
 	
 	 @Id
-	 @GeneratedValue(strategy= GenerationType.AUTO)
+	 @GeneratedValue(strategy= GenerationType.IDENTITY)
 	 @Column(name ="Id")
 	 private Long id;
 	
@@ -57,44 +57,53 @@ public class Produto {
 		this.valor = valor;
 		this.categoira = categoria;
 	}
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	
 	public double getValor() {
 		return valor;
 	}
+
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
+
 	public Categoria getCategoira() {
 		return categoira;
 	}
+
 	public void setCategoira(Categoria categoira) {
 		this.categoira = categoira;
 	}
+
 	public Truck getTruck() {
 		return truck;
 	}
+
 	public void setTruck(Truck truck) {
 		this.truck = truck;
 	}
-	public List<Pedido> getPedidos() {
-		return pedidos;
-	}
-	public void setPedidos(List<Pedido> pedidos) {
-		this.pedidos = pedidos;
-	}
-
-	
+	 
+	 /*
+	 @ManyToMany(mappedBy = "serieDisciplinas")
+	    private List<Aluno> alunos = new ArrayList<>();
+	    */
+	 
 	 
 
 	 

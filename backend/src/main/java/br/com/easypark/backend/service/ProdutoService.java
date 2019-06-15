@@ -46,21 +46,22 @@ public class ProdutoService {
 				.stream().map( produto -> ProdutoMapper.entityToDetail(produto))
 				.collect(Collectors.toList());
 				*/
-		/*		
+				
 		Truck search = this.truckDAO.findById(truckId)
 				.orElseThrow(()-> new ResourceNotFoundException("Pedido" + truckId +"não encontrado"));
 		
 		return search.getProdutos().stream().map( produto -> ProdutoMapper.entityToDetail(produto))
 		.collect(Collectors.toList());
 		
-		*/
 		
+		/*
 		List<ProdutoDTO> pesquisa = new ArrayList<>();
 		for(Produto r: produtoDAO.findAll()) {
 			if(r.getTruck().getId() == truckId)
 			pesquisa.add(new ProdutoDTO(r.getId(),r.getNome(),String.valueOf(r.getValor())));
 		}
 		return pesquisa;
+		*/
 		
 		
 	}
