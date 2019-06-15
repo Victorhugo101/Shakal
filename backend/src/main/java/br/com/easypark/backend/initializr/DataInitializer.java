@@ -109,7 +109,7 @@ public class DataInitializer implements ApplicationRunner {
         	truck.setProdutos(produtos);
         	this.truckDao.save(truck);
         	
-        	Mesa mesa = new Mesa("http://en.m.wikipedia.org",4);
+        	Mesa mesa = new Mesa("http://uqr.me/snazzoni/qr/14308",4);
         	mesa.setLatitude(-7.998533);
         	mesa.setLongitude(-34.924023);
         	this.mesaRepository.save(mesa);

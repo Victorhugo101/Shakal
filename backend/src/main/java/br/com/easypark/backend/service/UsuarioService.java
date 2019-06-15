@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.security.authentication.BadCredentialsException;
 
@@ -24,17 +25,18 @@ public class UsuarioService  implements UserDetailsService{
 	@Autowired
 	private ClienteDAO clienteDao;
 	
-	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	public Boolean cadastrarCliente(ClienteCadastroDTO cliente) {
-		
-		Cliente c = new Cliente(cliente.getNome(),cliente.getEmail(),cliente.getSenha());
+		String passwordCrypted = bCryptPasswordEncoder.encode(cliente.getSenha());
+		Cliente c = new Cliente(cliente.getEmail(),cliente.getNome(),passwordCrypted);
 		clienteDao.save(c);
 		return true;
 		
 	}
 	
-	
+	/*
 	public ClienteCadastroDTO logar(LoginDTO login) {
 		for(Cliente c: clienteDao.findAll()) {
 			if(c.getEmail().contains(login.getEmail())){
@@ -44,6 +46,7 @@ public class UsuarioService  implements UserDetailsService{
 		}
 		return new ClienteCadastroDTO(-1L,"","");
 	}
+	*/
 	
 	@Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

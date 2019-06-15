@@ -18,7 +18,7 @@ import br.com.easypark.backend.service.UsuarioService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/usuario")
+@RequestMapping("/cliente")
 public class ClienteController {
 	
 	@Autowired
