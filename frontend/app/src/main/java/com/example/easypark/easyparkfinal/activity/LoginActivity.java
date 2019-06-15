@@ -17,6 +17,7 @@ import com.example.easypark.easyparkfinal.beans.LoginDTO;
 import com.example.easypark.easyparkfinal.beans.TokenDTO;
 import com.example.easypark.easyparkfinal.network.ClienteService;
 import com.example.easypark.easyparkfinal.network.UsuarioService;
+import com.example.easypark.easyparkfinal.session.SessionManager;
 import com.example.easypark.easyparkfinal.utils.Constants;
 
 import retrofit2.Call;
@@ -74,12 +75,11 @@ public class LoginActivity extends AppCompatActivity {
 
                     SharedPreferences sp = getSharedPreferences("usuario", MODE_PRIVATE);
                     SharedPreferences.Editor ed = sp.edit();
-                    //ed.putInt("id", response.body().getId().intValue());
-                    //ed.putString("nome", response.body().getNome());
-                    //ed.putString("email", response.body().getEmail());
+                    ed.putLong("id", Long.valueOf(response.body().getId()));
+                    ed.putString("email", response.body().getEmail());
                     ed.putString("token", response.body().getToken());
-
                     ed.commit();
+                    initializeSession();
                     goToQrCode();
                 }
                 else exibirMensagem("E-mail ou senha inválido!");
@@ -124,5 +124,9 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 })*/
                 .show();
+    }
+
+    public void initializeSession(){
+        SessionManager.getInstance().createSession(getSharedPreferences("usuario", MODE_PRIVATE));
     }
 }

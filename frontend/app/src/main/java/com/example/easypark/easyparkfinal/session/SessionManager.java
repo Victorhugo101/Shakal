@@ -60,6 +60,18 @@ public class SessionManager {
             }
 
             @Override
+            public Long getId() {
+                return sharedPreferences.getLong("token",0);
+            }
+
+            @Override
+            public void saveId(Long id) {
+                SharedPreferences.Editor ed = sharedPreferences.edit();
+                ed.putLong("id", id);
+                ed.commit();
+            }
+
+            @Override
             public void savePassword(String password) {
                 SharedPreferences.Editor ed = sharedPreferences.edit();
                 ed.putString("senha", password);

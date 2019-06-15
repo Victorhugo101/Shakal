@@ -30,11 +30,11 @@ public class ProdutoController {
 	 public ResponseEntity<List<ProdutoDTO>> listarPorCategoria(@PathVariable long id) {
 		return new ResponseEntity<List<ProdutoDTO>>(produtoService.listarProdutosPorCategoria(id),HttpStatus.OK);
 		 
-	 }
+	}
 	@GetMapping("/truck/{id}")
-	 public ResponseEntity<List<ProdutoDTO>> listarPorTruck(@PathVariable long id) {
+	public ResponseEntity<List<ProdutoDTO>> listarPorTruck(@PathVariable long id) {
 		return new ResponseEntity<List<ProdutoDTO>>(produtoService.listarProdutosPorTruck(id),HttpStatus.OK);
 		 
-	 }
+	}
 
 }

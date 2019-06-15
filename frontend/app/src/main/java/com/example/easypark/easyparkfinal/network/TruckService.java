@@ -19,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class TruckService {
 
 
-    public static Call<List<Truck>> listarTrcksPerto(){
+    public static Call<List<Truck>> listarTrcksPerto(Long mesaId){
         /*
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
@@ -27,7 +27,7 @@ public class TruckService {
                 .build();
         IBackendAPI service = retrofit.create(IBackendAPI.class);
         */
-        return RetrofitBuilder.getApiService().listarTrucksPorMesa(1L);
+        return RetrofitBuilder.getApiService().listarTrucksPorMesa(mesaId);
     }
 
     public static List<Truck> converterParaTruck(Response<List<Truck>> lista){

@@ -12,6 +12,10 @@ public interface ISession {
 
     String getEmail();
 
+    Long getId();
+
+    void saveId(Long id);
+
     void savePassword(String password);
 
     String getPassword();

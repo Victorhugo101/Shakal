@@ -23,7 +23,7 @@ public class MesaController {
 	private MesaService mesaService;
 	
 	@PostMapping("/autenticar")
-	 public ResponseEntity<Boolean> autenticar(@RequestBody QrCodeDTO qrCodeDTO) {
-		return new ResponseEntity<Boolean>(mesaService.autenticar(qrCodeDTO.getQrcode()), HttpStatus.OK);
+	public ResponseEntity<Long> autenticar(@RequestBody QrCodeDTO qrCodeDTO) {
+		return new ResponseEntity<Long>(mesaService.autenticar(qrCodeDTO.getQrcode()), HttpStatus.OK);
 	}
 }

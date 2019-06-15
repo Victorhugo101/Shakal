@@ -13,7 +13,8 @@ import br.com.easypark.backend.data.PedidoProdutoDAO;
 import br.com.easypark.backend.data.ProdutoDAO;
 import br.com.easypark.backend.data.TruckDAO;
 import br.com.easypark.backend.exception.ResourceNotFoundException;
-import br.com.easypark.backend.mapper.PedidoMapper;
+import br.com.easypark.backend.mapper.PedidoProdutoMapper;
+import br.com.easypark.backend.mapper.ProdutoMapper;
 import br.com.easypark.backend.model.dto.PedidoDetalheDTO;
 import br.com.easypark.backend.model.dto.PedidoEntradaDTO;
 import br.com.easypark.backend.model.dto.PedidoOverviewTruckDTO;
@@ -70,12 +71,14 @@ public class PedidoService {
 	public List<PedidoSaidaDTO> listarPedidosCliente(Long id) {
 		List<PedidoSaidaDTO> pedidos = new ArrayList<PedidoSaidaDTO>();
 		for (Pedido p : this.pedidoDAO.findAll()) {
+			/*
 			if (p.getCliente().getId() == id) {
 				pedidos.add(new PedidoSaidaDTO(p.getId(),
 						(p.getProdutos().size() > 0) ? p.getProdutos().get(0).getProduto().getTruck().getNomeFantasia()
 								: "String teste",
 						"Preparando"));
 			}
+			*/
 
 		}
 		return pedidos;
@@ -100,7 +103,7 @@ public class PedidoService {
 	public PedidoDetalheDTO getDetalhesPedido(long id) {
 		Pedido pedido = this.pedidoDAO.findById(id)
 				.orElseThrow(()-> new ResourceNotFoundException("Pedido" + id +"não encontrado"));
-		return PedidoMapper.entityToDetail(pedido);
+		return PedidoProdutoMapper.entityToDetail(pedido);
 	}
 
 	public Boolean finalizarPedido(long pedidoId) {

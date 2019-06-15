@@ -13,5 +13,9 @@ public interface ProdutoDAO extends JpaRepository<Produto,Long>{
 	@Query("SELECT c FROM Produto p where p.categoria.id == ?1")
 	List<Produto> findByCategory(long categoriaID);
 	*/
-
+	/*
+	@Query("SELECT c FROM Produto p where p.truck.id == ?1")
+	List<Produto> findByTruckId(long truckId);
+	*/
+	
 }

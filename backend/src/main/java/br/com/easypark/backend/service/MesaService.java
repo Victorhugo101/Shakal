@@ -16,10 +16,10 @@ public class MesaService implements IMesaService{
 	
 	
 	@Override
-	public boolean autenticar(String qrCode) {
+	public Long autenticar(String qrCode) {
 		Mesa result = this.mesaDAO.findByQrcode(qrCode)
 				.orElseThrow(()-> new ResourceNotFoundException("QrCode inválido")); 
-		return true;
+		return result.getId();
 	}
 	
 

@@ -6,6 +6,7 @@ import com.example.easypark.easyparkfinal.beans.LoginDTO;
 import com.example.easypark.easyparkfinal.beans.PedidoDTO;
 import com.example.easypark.easyparkfinal.beans.PedidoListView;
 import com.example.easypark.easyparkfinal.beans.Produto;
+import com.example.easypark.easyparkfinal.beans.QrCode;
 import com.example.easypark.easyparkfinal.beans.TokenDTO;
 import com.example.easypark.easyparkfinal.beans.Truck;
 
@@ -53,4 +54,8 @@ public interface IBackendAPI {
     @Headers("Content-Type: application/json")
     @GET("/pedido/listar/{id}")
     Call<List<PedidoListView>> listarMeusPedidos(@Path("id") Long id);
+
+    //@Headers("Content-Type: application/json")
+    @POST("/mesa/autenticar")
+    Call<Long> auntenticarMesa(@Body QrCode qrCode);
 }

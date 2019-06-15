@@ -4,6 +4,12 @@ public class QrCodeDTO {
 	
 	private String qrcode;
 	
+	
+	
+	public QrCodeDTO() {
+		super();
+	}
+
 	public QrCodeDTO(String qrcode) {
 		this.qrcode = qrcode;
 	}

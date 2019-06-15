@@ -5,7 +5,6 @@ package com.example.easypark.easyparkfinal.activity;
         import android.support.v4.app.FragmentTransaction;
         import android.support.v7.app.AppCompatActivity;
         import android.os.Bundle;
-        import android.util.Log;
         import android.view.Menu;
         import android.view.MenuInflater;
         import android.view.MenuItem;
@@ -31,9 +30,9 @@ public class ListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
-
+        long mesaId = getIntent().getLongExtra("mesaId",1);
         if(savedInstanceState == null) {
-            Call call = TruckService.listarTrcksPerto();
+            Call call = TruckService.listarTrcksPerto(mesaId);
             call.enqueue(new Callback<List<Truck>>() {
 
                 @Override
@@ -50,11 +49,7 @@ public class ListActivity extends AppCompatActivity {
                     ft.replace(R.id.main_container, fragment);
                     ft.addToBackStack("ListFragment");
                     ft.commit();
-                    /*
-                    getSupportFragmentManager().beginTransaction().replace(R.id.main_container,
-                            fragment).commit();
-                            */
-                    //getSupportFragmentManager().executePendingTransactions();
+
                 }
 
                 @Override

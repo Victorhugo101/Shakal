@@ -9,6 +9,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.easypark.backend.data.CategoriaDAO;
 import br.com.easypark.backend.data.ClienteDAO;
@@ -63,6 +64,10 @@ public class DataInitializer implements ApplicationRunner {
         	Cliente cliente = new Cliente("cliente@gmail.com","teste",passwordCliente);
         	cliente = this.clienteRepository.save(cliente);
         
+        	String passwordTruck = bCryptPasswordEncoder.encode("123456");
+        	Truck truck = new Truck("10987483672452","Ichiraku's Ramen","siricascudo","truck@gmail.com",
+        			passwordTruck,-7.998534,-34.924024);
+        	this.truckDao.save(truck);
         	
         	Categoria categoriaJaponesa = new Categoria("Comida Japonesa");
         	Categoria categoriaLanches = new Categoria("Lanches");
@@ -83,6 +88,7 @@ public class DataInitializer implements ApplicationRunner {
         	List<Produto> produtos = new ArrayList<Produto>();
         	Produto xcoalho = this.produtoRepository.save(new Produto("X-Coalho",10D,categoriaLanches));
         	produtos.add(xcoalho);
+        	
         	Produto pizza = this.produtoRepository.save(new Produto("Pizza de Peperonni",19.90,categoriaLanches));
         	produtos.add(pizza);
         	Produto batata = this.produtoRepository.save(new Produto("Batata frita",5.50,categoriaLanches));
@@ -102,13 +108,11 @@ public class DataInitializer implements ApplicationRunner {
         	produtos.add(coxinha);
         	
         	
-        	String passwordTruck = bCryptPasswordEncoder.encode("123456");
-        	Truck truck = new Truck("10987483672452","Siri Cascudo","siricascudo","truck@gmail.com",
-        			passwordTruck,-7.998534,-34.924024);
-        	truck.setProdutos(produtos);
-        	this.truckDao.save(truck);
         	
-        	Mesa mesa = new Mesa("http://en.m.wikipedia.org",4);
+        	//truck.setProdutos(produtos);
+        	
+        	
+        	Mesa mesa = new Mesa("http://uqr.me/snazzoni/qr/14308",4);
         	mesa.setLatitude(-7.998533);
         	mesa.setLongitude(-34.924023);
         	this.mesaRepository.save(mesa);
@@ -129,13 +133,8 @@ public class DataInitializer implements ApplicationRunner {
         	System.out.println("Inserted Empty data");
         	
         }
-        
-       
-        
-        
-        
-       
-        
     }
+    
+  
    
 }
